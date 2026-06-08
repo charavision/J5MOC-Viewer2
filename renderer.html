@@ -20,6 +20,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   background: #030303;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 canvas {
@@ -34,9 +35,102 @@ canvas {
   justify-content: center;
   background: #030303;
   color: white;
-  font-family: Arial, sans-serif;
   font-size: 18px;
+  z-index: 20;
+}
+
+#ui {
+  position: fixed;
+  top: 14px;
+  left: 14px;
   z-index: 10;
+  width: 330px;
+  max-height: calc(100vh - 28px);
+  overflow-y: auto;
+  background: rgba(0,0,0,0.76);
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+#ui h1 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.group {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+
+.group-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+
+.control {
+  margin: 9px 0;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.value {
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+input[type="color"] {
+  width: 100%;
+  height: 30px;
+  border: 0;
+  background: transparent;
+}
+
+button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 9px;
+  border: 0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #dddddd;
+}
+
+#valuesBox {
+  margin-top: 10px;
+  width: 100%;
+  height: 120px;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 11px;
+  resize: none;
 }
 </style>
 </head>
@@ -44,6 +138,118 @@ canvas {
 <body>
 
 <div id="loading">Loading J5MOC...</div>
+
+<div id="ui">
+  <h1>J5MOC Renderer Controls</h1>
+
+  <div class="group">
+    <div class="group-title">Renderer</div>
+
+    <div class="control">
+      <div class="row"><span>Exposure</span><span class="value" id="vExposure"></span></div>
+      <input id="exposure" type="range" min="0.2" max="2.0" step="0.01" value="0.85">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Background</span><span class="value" id="vBackground"></span></div>
+      <input id="background" type="color" value="#030303">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">HDR / Material</div>
+
+    <div class="control">
+      <div class="row"><span>EnvMap Intensity</span><span class="value" id="vEnvMap"></span></div>
+      <input id="envMapIntensity" type="range" min="0" max="5" step="0.05" value="2.0">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Roughness Override</span><span class="value" id="vRoughness"></span></div>
+      <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.38">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Metalness Override</span><span class="value" id="vMetalness"></span></div>
+      <input id="metalness" type="range" min="0" max="1" step="0.01" value="0.02">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Lights</div>
+
+    <div class="control">
+      <div class="row"><span>Hemisphere</span><span class="value" id="vHemi"></span></div>
+      <input id="hemi" type="range" min="0" max="3" step="0.01" value="0.25">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Key Light</span><span class="value" id="vKey"></span></div>
+      <input id="key" type="range" min="0" max="6" step="0.01" value="1.2">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Fill Light</span><span class="value" id="vFill"></span></div>
+      <input id="fill" type="range" min="0" max="4" step="0.01" value="0.35">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Rim Light</span><span class="value" id="vRim"></span></div>
+      <input id="rim" type="range" min="0" max="5" step="0.01" value="0.9">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Bloom</div>
+
+    <div class="control">
+      <div class="row"><span>Bloom Strength</span><span class="value" id="vBloomStrength"></span></div>
+      <input id="bloomStrength" type="range" min="0" max="1.5" step="0.01" value="0.12">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Bloom Radius</span><span class="value" id="vBloomRadius"></span></div>
+      <input id="bloomRadius" type="range" min="0" max="1" step="0.01" value="0.12">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Bloom Threshold</span><span class="value" id="vBloomThreshold"></span></div>
+      <input id="bloomThreshold" type="range" min="0" max="1" step="0.01" value="0.92">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Camera</div>
+
+    <div class="control">
+      <div class="row"><span>Distance</span><span class="value" id="vDistance"></span></div>
+      <input id="distance" type="range" min="1.0" max="4.0" step="0.01" value="2.3">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Height</span><span class="value" id="vHeight"></span></div>
+      <input id="height" type="range" min="-0.2" max="1.4" step="0.01" value="0.36">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Angle</span><span class="value" id="vAngle"></span></div>
+      <input id="angle" type="range" min="-180" max="180" step="1" value="40">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>FOV</span><span class="value" id="vFov"></span></div>
+      <input id="fov" type="range" min="15" max="60" step="1" value="24">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Auto Rotate Speed</span><span class="value" id="vRotate"></span></div>
+      <input id="rotateSpeed" type="range" min="0" max="2" step="0.01" value="0.35">
+    </div>
+  </div>
+
+  <button id="copyValues">Copy values</button>
+  <textarea id="valuesBox" readonly></textarea>
+</div>
 
 <script type="module">
 import * as THREE from "three";
@@ -59,72 +265,127 @@ import { UnrealBloomPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/exam
 import { OutputPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/OutputPass.js";
 
 let scene, camera, renderer, controls, composer;
-let model;
+let model = null;
+let modelSize = 10;
 
-scene = new THREE.Scene();
-scene.background = new THREE.Color(0x030303);
+let hemiLight, keyLight, fillLight, rimLight;
+let bloomPass;
 
-camera = new THREE.PerspectiveCamera(
-  24,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  100000
-);
+const ui = {
+  exposure: document.getElementById("exposure"),
+  background: document.getElementById("background"),
+  envMapIntensity: document.getElementById("envMapIntensity"),
+  roughness: document.getElementById("roughness"),
+  metalness: document.getElementById("metalness"),
+  hemi: document.getElementById("hemi"),
+  key: document.getElementById("key"),
+  fill: document.getElementById("fill"),
+  rim: document.getElementById("rim"),
+  bloomStrength: document.getElementById("bloomStrength"),
+  bloomRadius: document.getElementById("bloomRadius"),
+  bloomThreshold: document.getElementById("bloomThreshold"),
+  distance: document.getElementById("distance"),
+  height: document.getElementById("height"),
+  angle: document.getElementById("angle"),
+  fov: document.getElementById("fov"),
+  rotateSpeed: document.getElementById("rotateSpeed")
+};
 
-renderer = new THREE.WebGLRenderer({
-  antialias: true,
-  alpha: false
-});
+const labels = {
+  exposure: document.getElementById("vExposure"),
+  background: document.getElementById("vBackground"),
+  envMapIntensity: document.getElementById("vEnvMap"),
+  roughness: document.getElementById("vRoughness"),
+  metalness: document.getElementById("vMetalness"),
+  hemi: document.getElementById("vHemi"),
+  key: document.getElementById("vKey"),
+  fill: document.getElementById("vFill"),
+  rim: document.getElementById("vRim"),
+  bloomStrength: document.getElementById("vBloomStrength"),
+  bloomRadius: document.getElementById("vBloomRadius"),
+  bloomThreshold: document.getElementById("vBloomThreshold"),
+  distance: document.getElementById("vDistance"),
+  height: document.getElementById("vHeight"),
+  angle: document.getElementById("vAngle"),
+  fov: document.getElementById("vFov"),
+  rotateSpeed: document.getElementById("vRotate")
+};
 
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.85;
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-document.body.appendChild(renderer.domElement);
-
-composer = new EffectComposer(renderer);
-
-const renderPass = new RenderPass(scene, camera);
-composer.addPass(renderPass);
-
-const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.22,
-  0.45,
-  0.88
-);
-composer.addPass(bloomPass);
-
-const outputPass = new OutputPass();
-composer.addPass(outputPass);
-
-controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.45;
-
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x080808, 0.35);
-scene.add(hemiLight);
-
-const keyLight = new THREE.DirectionalLight(0xffffff, 1.7);
-keyLight.position.set(6, 8, 5);
-scene.add(keyLight);
-
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.45);
-fillLight.position.set(-5, 3, -4);
-scene.add(fillLight);
-
-const rimLight = new THREE.DirectionalLight(0xffffff, 1.25);
-rimLight.position.set(-6, 4, 8);
-scene.add(rimLight);
-
+init();
 loadHDRI();
 loadModel();
+animate();
+
+function init() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(ui.background.value);
+
+  camera = new THREE.PerspectiveCamera(
+    Number(ui.fov.value),
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100000
+  );
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: false
+  });
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = Number(ui.exposure.value);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  document.body.appendChild(renderer.domElement);
+
+  composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+
+  bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    Number(ui.bloomStrength.value),
+    Number(ui.bloomRadius.value),
+    Number(ui.bloomThreshold.value)
+  );
+
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = Number(ui.rotateSpeed.value);
+
+  hemiLight = new THREE.HemisphereLight(0xffffff, 0x080808, Number(ui.hemi.value));
+  scene.add(hemiLight);
+
+  keyLight = new THREE.DirectionalLight(0xffffff, Number(ui.key.value));
+  keyLight.position.set(6, 8, 5);
+  scene.add(keyLight);
+
+  fillLight = new THREE.DirectionalLight(0xffffff, Number(ui.fill.value));
+  fillLight.position.set(-5, 3, -4);
+  scene.add(fillLight);
+
+  rimLight = new THREE.DirectionalLight(0xffffff, Number(ui.rim.value));
+  rimLight.position.set(-6, 4, 8);
+  scene.add(rimLight);
+
+  Object.values(ui).forEach(input => {
+    input.addEventListener("input", applySettings);
+  });
+
+  document.getElementById("copyValues").addEventListener("click", copyValues);
+
+  window.addEventListener("resize", onResize);
+
+  applySettings();
+}
 
 function loadHDRI() {
   const pmrem = new THREE.PMREMGenerator(renderer);
@@ -160,30 +421,11 @@ function loadModel() {
         if (obj.isMesh) {
           obj.castShadow = true;
           obj.receiveShadow = true;
-
-          if (obj.material) {
-            const materials = Array.isArray(obj.material)
-              ? obj.material
-              : [obj.material];
-
-            materials.forEach(mat => {
-              mat.envMapIntensity = 3.5;
-
-              if ("roughness" in mat) {
-                mat.roughness = Math.max(mat.roughness ?? 0.32, 0.28);
-              }
-
-              if ("metalness" in mat) {
-                mat.metalness = Math.min(mat.metalness ?? 0.0, 0.15);
-              }
-
-              mat.needsUpdate = true;
-            });
-          }
         }
       });
 
       frameModel(model);
+      applySettings();
       document.getElementById("loading").style.display = "none";
     },
     undefined,
@@ -205,17 +447,72 @@ function frameModel(object) {
 
   object.position.sub(center);
 
-  const maxDim = Math.max(size.x, size.y, size.z);
-  const distance = maxDim * 2.3;
+  modelSize = Math.max(size.x, size.y, size.z);
+
+  updateCamera();
+}
+
+function applySettings() {
+  renderer.toneMappingExposure = Number(ui.exposure.value);
+  scene.background = new THREE.Color(ui.background.value);
+
+  hemiLight.intensity = Number(ui.hemi.value);
+  keyLight.intensity = Number(ui.key.value);
+  fillLight.intensity = Number(ui.fill.value);
+  rimLight.intensity = Number(ui.rim.value);
+
+  bloomPass.strength = Number(ui.bloomStrength.value);
+  bloomPass.radius = Number(ui.bloomRadius.value);
+  bloomPass.threshold = Number(ui.bloomThreshold.value);
+
+  camera.fov = Number(ui.fov.value);
+  camera.updateProjectionMatrix();
+
+  controls.autoRotateSpeed = Number(ui.rotateSpeed.value);
+
+  if (model) {
+    model.traverse(obj => {
+      if (obj.isMesh && obj.material) {
+        const materials = Array.isArray(obj.material)
+          ? obj.material
+          : [obj.material];
+
+        materials.forEach(mat => {
+          mat.envMapIntensity = Number(ui.envMapIntensity.value);
+
+          if ("roughness" in mat) {
+            mat.roughness = Number(ui.roughness.value);
+          }
+
+          if ("metalness" in mat) {
+            mat.metalness = Number(ui.metalness.value);
+          }
+
+          mat.needsUpdate = true;
+        });
+      }
+    });
+
+    updateCamera();
+  }
+
+  updateLabels();
+  updateValuesBox();
+}
+
+function updateCamera() {
+  const angle = THREE.MathUtils.degToRad(Number(ui.angle.value));
+  const distance = modelSize * Number(ui.distance.value);
+  const height = modelSize * Number(ui.height.value);
 
   camera.position.set(
-    distance * 0.85,
-    distance * 0.36,
-    distance
+    Math.sin(angle) * distance,
+    height,
+    Math.cos(angle) * distance
   );
 
-  camera.near = maxDim / 100;
-  camera.far = maxDim * 100;
+  camera.near = modelSize / 100;
+  camera.far = modelSize * 100;
   camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
 
@@ -223,23 +520,77 @@ function frameModel(object) {
   controls.update();
 }
 
-window.addEventListener("resize", () => {
+function updateLabels() {
+  labels.exposure.textContent = Number(ui.exposure.value).toFixed(2);
+  labels.background.textContent = ui.background.value;
+  labels.envMapIntensity.textContent = Number(ui.envMapIntensity.value).toFixed(2);
+  labels.roughness.textContent = Number(ui.roughness.value).toFixed(2);
+  labels.metalness.textContent = Number(ui.metalness.value).toFixed(2);
+  labels.hemi.textContent = Number(ui.hemi.value).toFixed(2);
+  labels.key.textContent = Number(ui.key.value).toFixed(2);
+  labels.fill.textContent = Number(ui.fill.value).toFixed(2);
+  labels.rim.textContent = Number(ui.rim.value).toFixed(2);
+  labels.bloomStrength.textContent = Number(ui.bloomStrength.value).toFixed(2);
+  labels.bloomRadius.textContent = Number(ui.bloomRadius.value).toFixed(2);
+  labels.bloomThreshold.textContent = Number(ui.bloomThreshold.value).toFixed(2);
+  labels.distance.textContent = Number(ui.distance.value).toFixed(2);
+  labels.height.textContent = Number(ui.height.value).toFixed(2);
+  labels.angle.textContent = ui.angle.value + "°";
+  labels.fov.textContent = ui.fov.value + "°";
+  labels.rotateSpeed.textContent = Number(ui.rotateSpeed.value).toFixed(2);
+}
+
+function getValuesText() {
+  return [
+    "renderer.toneMappingExposure = " + Number(ui.exposure.value).toFixed(2),
+    "background = " + ui.background.value,
+    "material.envMapIntensity = " + Number(ui.envMapIntensity.value).toFixed(2),
+    "material.roughness = " + Number(ui.roughness.value).toFixed(2),
+    "material.metalness = " + Number(ui.metalness.value).toFixed(2),
+    "hemiLight.intensity = " + Number(ui.hemi.value).toFixed(2),
+    "keyLight.intensity = " + Number(ui.key.value).toFixed(2),
+    "fillLight.intensity = " + Number(ui.fill.value).toFixed(2),
+    "rimLight.intensity = " + Number(ui.rim.value).toFixed(2),
+    "bloom.strength = " + Number(ui.bloomStrength.value).toFixed(2),
+    "bloom.radius = " + Number(ui.bloomRadius.value).toFixed(2),
+    "bloom.threshold = " + Number(ui.bloomThreshold.value).toFixed(2),
+    "camera.distance = " + Number(ui.distance.value).toFixed(2),
+    "camera.height = " + Number(ui.height.value).toFixed(2),
+    "camera.angle = " + ui.angle.value,
+    "camera.fov = " + ui.fov.value,
+    "controls.autoRotateSpeed = " + Number(ui.rotateSpeed.value).toFixed(2)
+  ].join("\n");
+}
+
+function updateValuesBox() {
+  document.getElementById("valuesBox").value = getValuesText();
+}
+
+async function copyValues() {
+  const text = getValuesText();
+  document.getElementById("valuesBox").value = text;
+
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (e) {
+    console.warn("Clipboard nicht verfügbar:", e);
+  }
+}
+
+function onResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
-
   bloomPass.setSize(window.innerWidth, window.innerHeight);
-});
+}
 
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
   composer.render();
 }
-
-animate();
 </script>
 
 </body>
