@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>J5MOC Renderer</title>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #111;
+}
+
+#ui {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  background: rgba(0,0,0,.78);
+  color: white;
+  padding: 14px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  border-radius: 10px;
+  width: 260px;
+}
+
+#ui input[type="range"] {
+  width: 100%;
+}
+
+#ui button, #ui input[type="file"] {
+  width: 100%;
+  margin-top: 6px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+canvas {
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div id="ui">
+  <strong>J5MOC Renderer</strong><br>
+
+  <input type="file" id="file" accept=".glb,.gltf">
+
+  <label>Belichtung</label>
+  <input id="exposure" type="range" min="0.2" max="3" step="0.1" value="1.3">
+
+  <label>HDRI-Stärke</label>
+  <input id="envIntensity" type="range" min="0" max="5" step="0.1" value="1.6">
+
+  <label>Hauptlicht</label>
+  <input id="keylight" type="range" min="0" max="10" step="0.1" value="4.5">
+
+  <label>Fülllicht</label>
+  <input id="filllight" type="range" min="0" max="5" step="0.1" value="1.2">
+
+  <label>Rim Light</label>
+  <input id="rimlight" type="range" min="0" max="8" step="0.1" value="3">
+
+  <label>Kamera-Abstand</label>
+  <input id="distance" type="range" min="0.8" max="4" step="0.1" value="1.8">
+
+  <label>Kamera-Höhe</label>
+  <input id="height" type="range" min="0.1" max="1.5" step="0.05" value="0.45">
+
+  <label>Kamera-Winkel</label>
+  <input id="angle" type="range" min="-180" max="180" step="1" value="35">
+
+  <label>Hintergrund</label>
+  <input id="bg" type="color" value="#111111">
+
+  <button id="save">PNG 1920×1080 speichern</button>
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+import { RGBELoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/RGBELoader.js";
+import { MeshoptDecoder } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/meshopt_decoder.module.js";
+
+let scene, camera, renderer, controls, model;
+let modelSize = 10;
+let key, fill, rim;
+
+init();
+animate();
+
+function init() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x111111);
+
+  camera = new THREE.PerspectiveCamera(
+    35,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100000
+  );
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    preserveDrawingBuffer: true
+  });
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.3;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  document.body.appendChild(renderer.domElement);
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 0.6);
+  scene.add(hemi);
+
+  key = new THREE.DirectionalLight(0xffffff, 4.5);
+  key.position.set(5, 8, 6);
+  key.castShadow = true;
+  scene.add(key);
+
+  fill = new THREE.DirectionalLight(0xffffff, 1.2);
+  fill.position.set(-5, 3, -4);
+  scene.add(fill);
+
+  rim = new THREE.DirectionalLight(0xffffff, 3);
+  rim.position.set(-6, 5, 8);
+  scene.add(rim);
+
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(500, 500),
+    new THREE.MeshStandardMaterial({
+      color: 0x151515,
+      roughness: 0.28,
+      metalness: 0.15
+    })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.receiveShadow = true;
+  scene.add(floor);
+
+  loadHDRI();
+
+  document.getElementById("file").addEventListener("change", loadFile);
+  document.getElementById("save").addEventListener("click", savePNG);
+
+  document.getElementById("exposure").oninput = e => {
+    renderer.toneMappingExposure = Number(e.target.value);
+  };
+
+  document.getElementById("envIntensity").oninput = e => {
+    if (!model) return;
+    model.traverse(obj => {
+      if (obj.isMesh && obj.material) {
+        const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+        mats.forEach(mat => {
+          mat.envMapIntensity = Number(e.target.value);
+          mat.needsUpdate = true;
+        });
+      }
+    });
+  };
+
+  document.getElementById("keylight").oninput = e => {
+    key.intensity = Number(e.target.value);
+  };
+
+  document.getElementById("filllight").oninput = e => {
+    fill.intensity = Number(e.target.value);
+  };
+
+  document.getElementById("rimlight").oninput = e => {
+    rim.intensity = Number(e.target.value);
+  };
+
+  document.getElementById("distance").oninput = updateCamera;
+  document.getElementById("height").oninput = updateCamera;
+  document.getElementById("angle").oninput = updateCamera;
+
+  document.getElementById("bg").oninput = e => {
+    scene.background = new THREE.Color(e.target.value);
+  };
+
+  window.addEventListener("resize", onResize);
+}
+
+function loadHDRI() {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+
+  new RGBELoader()
+    .load(
+      "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr",
+      texture => {
+        const envMap = pmrem.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        texture.dispose();
+        pmrem.dispose();
+      },
+      undefined,
+      err => {
+        console.warn("HDRI konnte nicht geladen werden:", err);
+      }
+    );
+}
+
+function loadFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const url = URL.createObjectURL(file);
+
+  const loader = new GLTFLoader();
+  loader.setMeshoptDecoder(MeshoptDecoder);
+
+  loader.load(
+    url,
+    gltf => {
+      if (model) scene.remove(model);
+
+      model = gltf.scene;
+      scene.add(model);
+
+      model.traverse(obj => {
+        if (obj.isMesh) {
+          obj.castShadow = true;
+          obj.receiveShadow = true;
+
+          if (obj.material) {
+            const mats = Array.isArray(obj.material) ? obj.material : [obj.material];
+            mats.forEach(mat => {
+              mat.envMapIntensity = Number(document.getElementById("envIntensity").value);
+              mat.needsUpdate = true;
+            });
+          }
+        }
+      });
+
+      frameModel(model);
+      URL.revokeObjectURL(url);
+    },
+    progress => {
+      console.log("Loading:", progress);
+    },
+    err => {
+      console.error(err);
+      alert("GLB konnte nicht geladen werden. Konsole prüfen.");
+    }
+  );
+}
+
+function frameModel(object) {
+  const box = new THREE.Box3().setFromObject(object);
+  const center = new THREE.Vector3();
+  const size = new THREE.Vector3();
+
+  box.getCenter(center);
+  box.getSize(size);
+
+  object.position.sub(center);
+
+  modelSize = Math.max(size.x, size.y, size.z);
+
+  updateCamera();
+
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+
+function updateCamera() {
+  if (!modelSize) return;
+
+  const distanceFactor = Number(document.getElementById("distance").value);
+  const heightFactor = Number(document.getElementById("height").value);
+  const angleDeg = Number(document.getElementById("angle").value);
+
+  const angle = THREE.MathUtils.degToRad(angleDeg);
+  const distance = modelSize * distanceFactor;
+
+  camera.position.set(
+    Math.sin(angle) * distance,
+    modelSize * heightFactor,
+    Math.cos(angle) * distance
+  );
+
+  camera.near = modelSize / 100;
+  camera.far = modelSize * 100;
+  camera.lookAt(0, 0, 0);
+  camera.updateProjectionMatrix();
+
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+
+function savePNG() {
+  const oldSize = new THREE.Vector2();
+  renderer.getSize(oldSize);
+
+  const oldAspect = camera.aspect;
+
+  renderer.setSize(1920, 1080, false);
+  camera.aspect = 1920 / 1080;
+  camera.updateProjectionMatrix();
+
+  renderer.render(scene, camera);
+
+  const a = document.createElement("a");
+  a.download = "j5moc-render-1920x1080.png";
+  a.href = renderer.domElement.toDataURL("image/png");
+  a.click();
+
+  renderer.setSize(oldSize.x, oldSize.y, false);
+  camera.aspect = oldAspect;
+  camera.updateProjectionMatrix();
+}
+
+function onResize() {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+</script>
+</body>
+</html>
