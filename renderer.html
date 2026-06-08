@@ -23,9 +23,7 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas {
-  display: block;
-}
+canvas { display: block; }
 
 #loading {
   position: fixed;
@@ -44,19 +42,18 @@ canvas {
   top: 14px;
   left: 14px;
   z-index: 10;
-  width: 330px;
+  width: 340px;
   max-height: calc(100vh - 28px);
   overflow-y: auto;
-  background: rgba(0,0,0,0.76);
+  background: rgba(0,0,0,0.78);
   color: white;
   padding: 14px;
   border-radius: 12px;
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   box-sizing: border-box;
 }
 
-#ui h1 {
+h1 {
   margin: 0 0 10px 0;
   font-size: 16px;
 }
@@ -72,7 +69,6 @@ canvas {
   text-transform: uppercase;
   opacity: 0.75;
   margin-bottom: 8px;
-  letter-spacing: 0.04em;
 }
 
 .control {
@@ -82,7 +78,6 @@ canvas {
 .row {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
   font-size: 12px;
   margin-bottom: 3px;
 }
@@ -109,20 +104,16 @@ button {
   padding: 9px;
   border: 0;
   border-radius: 8px;
-  background: #ffffff;
+  background: white;
   color: #111;
   font-weight: 700;
   cursor: pointer;
 }
 
-button:hover {
-  background: #dddddd;
-}
-
-#valuesBox {
-  margin-top: 10px;
+textarea {
   width: 100%;
   height: 120px;
+  margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.08);
   color: white;
@@ -130,7 +121,6 @@ button:hover {
   border-radius: 8px;
   padding: 8px;
   font-size: 11px;
-  resize: none;
 }
 </style>
 </head>
@@ -146,32 +136,42 @@ button:hover {
     <div class="group-title">Renderer</div>
 
     <div class="control">
-      <div class="row"><span>Exposure</span><span class="value" id="vExposure"></span></div>
-      <input id="exposure" type="range" min="0.2" max="2.0" step="0.01" value="0.85">
+      <div class="row"><span>Exposure</span><span id="vExposure" class="value"></span></div>
+      <input id="exposure" type="range" min="0.2" max="2.0" step="0.01" value="0.75">
     </div>
 
     <div class="control">
-      <div class="row"><span>Background</span><span class="value" id="vBackground"></span></div>
+      <div class="row"><span>Background</span><span id="vBackground" class="value"></span></div>
       <input id="background" type="color" value="#030303">
     </div>
   </div>
 
   <div class="group">
-    <div class="group-title">HDR / Material</div>
+    <div class="group-title">HDR / Reflections</div>
 
     <div class="control">
-      <div class="row"><span>EnvMap Intensity</span><span class="value" id="vEnvMap"></span></div>
-      <input id="envMapIntensity" type="range" min="0" max="5" step="0.05" value="2.0">
+      <div class="row"><span>EnvMap Intensity</span><span id="vEnvMap" class="value"></span></div>
+      <input id="envMapIntensity" type="range" min="0" max="10" step="0.05" value="4.0">
     </div>
 
     <div class="control">
-      <div class="row"><span>Roughness Override</span><span class="value" id="vRoughness"></span></div>
-      <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.38">
+      <div class="row"><span>Roughness</span><span id="vRoughness" class="value"></span></div>
+      <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.22">
     </div>
 
     <div class="control">
-      <div class="row"><span>Metalness Override</span><span class="value" id="vMetalness"></span></div>
-      <input id="metalness" type="range" min="0" max="1" step="0.01" value="0.02">
+      <div class="row"><span>Metalness</span><span id="vMetalness" class="value"></span></div>
+      <input id="metalness" type="range" min="0" max="1" step="0.01" value="0.00">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Clearcoat</span><span id="vClearcoat" class="value"></span></div>
+      <input id="clearcoat" type="range" min="0" max="1" step="0.01" value="0.65">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Clearcoat Roughness</span><span id="vClearcoatRoughness" class="value"></span></div>
+      <input id="clearcoatRoughness" type="range" min="0" max="1" step="0.01" value="0.18">
     </div>
   </div>
 
@@ -179,23 +179,23 @@ button:hover {
     <div class="group-title">Lights</div>
 
     <div class="control">
-      <div class="row"><span>Hemisphere</span><span class="value" id="vHemi"></span></div>
-      <input id="hemi" type="range" min="0" max="3" step="0.01" value="0.25">
+      <div class="row"><span>Hemisphere</span><span id="vHemi" class="value"></span></div>
+      <input id="hemi" type="range" min="0" max="3" step="0.01" value="0.15">
     </div>
 
     <div class="control">
-      <div class="row"><span>Key Light</span><span class="value" id="vKey"></span></div>
-      <input id="key" type="range" min="0" max="6" step="0.01" value="1.2">
+      <div class="row"><span>Key Light</span><span id="vKey" class="value"></span></div>
+      <input id="key" type="range" min="0" max="6" step="0.01" value="0.8">
     </div>
 
     <div class="control">
-      <div class="row"><span>Fill Light</span><span class="value" id="vFill"></span></div>
-      <input id="fill" type="range" min="0" max="4" step="0.01" value="0.35">
+      <div class="row"><span>Fill Light</span><span id="vFill" class="value"></span></div>
+      <input id="fill" type="range" min="0" max="4" step="0.01" value="0.25">
     </div>
 
     <div class="control">
-      <div class="row"><span>Rim Light</span><span class="value" id="vRim"></span></div>
-      <input id="rim" type="range" min="0" max="5" step="0.01" value="0.9">
+      <div class="row"><span>Rim Light</span><span id="vRim" class="value"></span></div>
+      <input id="rim" type="range" min="0" max="5" step="0.01" value="0.7">
     </div>
   </div>
 
@@ -203,18 +203,18 @@ button:hover {
     <div class="group-title">Bloom</div>
 
     <div class="control">
-      <div class="row"><span>Bloom Strength</span><span class="value" id="vBloomStrength"></span></div>
-      <input id="bloomStrength" type="range" min="0" max="1.5" step="0.01" value="0.12">
+      <div class="row"><span>Bloom Strength</span><span id="vBloomStrength" class="value"></span></div>
+      <input id="bloomStrength" type="range" min="0" max="1.5" step="0.01" value="0.05">
     </div>
 
     <div class="control">
-      <div class="row"><span>Bloom Radius</span><span class="value" id="vBloomRadius"></span></div>
-      <input id="bloomRadius" type="range" min="0" max="1" step="0.01" value="0.12">
+      <div class="row"><span>Bloom Radius</span><span id="vBloomRadius" class="value"></span></div>
+      <input id="bloomRadius" type="range" min="0" max="1" step="0.01" value="0.08">
     </div>
 
     <div class="control">
-      <div class="row"><span>Bloom Threshold</span><span class="value" id="vBloomThreshold"></span></div>
-      <input id="bloomThreshold" type="range" min="0" max="1" step="0.01" value="0.92">
+      <div class="row"><span>Bloom Threshold</span><span id="vBloomThreshold" class="value"></span></div>
+      <input id="bloomThreshold" type="range" min="0" max="1" step="0.01" value="0.95">
     </div>
   </div>
 
@@ -222,27 +222,27 @@ button:hover {
     <div class="group-title">Camera</div>
 
     <div class="control">
-      <div class="row"><span>Distance</span><span class="value" id="vDistance"></span></div>
-      <input id="distance" type="range" min="1.0" max="4.0" step="0.01" value="2.3">
+      <div class="row"><span>Distance</span><span id="vDistance" class="value"></span></div>
+      <input id="distance" type="range" min="1.0" max="4.0" step="0.01" value="2.2">
     </div>
 
     <div class="control">
-      <div class="row"><span>Height</span><span class="value" id="vHeight"></span></div>
-      <input id="height" type="range" min="-0.2" max="1.4" step="0.01" value="0.36">
+      <div class="row"><span>Height</span><span id="vHeight" class="value"></span></div>
+      <input id="height" type="range" min="-0.2" max="1.4" step="0.01" value="0.34">
     </div>
 
     <div class="control">
-      <div class="row"><span>Angle</span><span class="value" id="vAngle"></span></div>
+      <div class="row"><span>Angle</span><span id="vAngle" class="value"></span></div>
       <input id="angle" type="range" min="-180" max="180" step="1" value="40">
     </div>
 
     <div class="control">
-      <div class="row"><span>FOV</span><span class="value" id="vFov"></span></div>
+      <div class="row"><span>FOV</span><span id="vFov" class="value"></span></div>
       <input id="fov" type="range" min="15" max="60" step="1" value="24">
     </div>
 
     <div class="control">
-      <div class="row"><span>Auto Rotate Speed</span><span class="value" id="vRotate"></span></div>
+      <div class="row"><span>Auto Rotate Speed</span><span id="vRotate" class="value"></span></div>
       <input id="rotateSpeed" type="range" min="0" max="2" step="0.01" value="0.35">
     </div>
   </div>
@@ -267,49 +267,47 @@ import { OutputPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/
 let scene, camera, renderer, controls, composer;
 let model = null;
 let modelSize = 10;
+let envMap = null;
 
 let hemiLight, keyLight, fillLight, rimLight;
 let bloomPass;
 
-const ui = {
-  exposure: document.getElementById("exposure"),
-  background: document.getElementById("background"),
-  envMapIntensity: document.getElementById("envMapIntensity"),
-  roughness: document.getElementById("roughness"),
-  metalness: document.getElementById("metalness"),
-  hemi: document.getElementById("hemi"),
-  key: document.getElementById("key"),
-  fill: document.getElementById("fill"),
-  rim: document.getElementById("rim"),
-  bloomStrength: document.getElementById("bloomStrength"),
-  bloomRadius: document.getElementById("bloomRadius"),
-  bloomThreshold: document.getElementById("bloomThreshold"),
-  distance: document.getElementById("distance"),
-  height: document.getElementById("height"),
-  angle: document.getElementById("angle"),
-  fov: document.getElementById("fov"),
-  rotateSpeed: document.getElementById("rotateSpeed")
-};
+const ui = {};
+const labels = {};
 
-const labels = {
-  exposure: document.getElementById("vExposure"),
-  background: document.getElementById("vBackground"),
-  envMapIntensity: document.getElementById("vEnvMap"),
-  roughness: document.getElementById("vRoughness"),
-  metalness: document.getElementById("vMetalness"),
-  hemi: document.getElementById("vHemi"),
-  key: document.getElementById("vKey"),
-  fill: document.getElementById("vFill"),
-  rim: document.getElementById("vRim"),
-  bloomStrength: document.getElementById("vBloomStrength"),
-  bloomRadius: document.getElementById("vBloomRadius"),
-  bloomThreshold: document.getElementById("vBloomThreshold"),
-  distance: document.getElementById("vDistance"),
-  height: document.getElementById("vHeight"),
-  angle: document.getElementById("vAngle"),
-  fov: document.getElementById("vFov"),
-  rotateSpeed: document.getElementById("vRotate")
-};
+[
+  "exposure", "background",
+  "envMapIntensity", "roughness", "metalness", "clearcoat", "clearcoatRoughness",
+  "hemi", "key", "fill", "rim",
+  "bloomStrength", "bloomRadius", "bloomThreshold",
+  "distance", "height", "angle", "fov", "rotateSpeed"
+].forEach(id => {
+  ui[id] = document.getElementById(id);
+});
+
+[
+  ["exposure", "vExposure"],
+  ["background", "vBackground"],
+  ["envMapIntensity", "vEnvMap"],
+  ["roughness", "vRoughness"],
+  ["metalness", "vMetalness"],
+  ["clearcoat", "vClearcoat"],
+  ["clearcoatRoughness", "vClearcoatRoughness"],
+  ["hemi", "vHemi"],
+  ["key", "vKey"],
+  ["fill", "vFill"],
+  ["rim", "vRim"],
+  ["bloomStrength", "vBloomStrength"],
+  ["bloomRadius", "vBloomRadius"],
+  ["bloomThreshold", "vBloomThreshold"],
+  ["distance", "vDistance"],
+  ["height", "vHeight"],
+  ["angle", "vAngle"],
+  ["fov", "vFov"],
+  ["rotateSpeed", "vRotate"]
+].forEach(([key, id]) => {
+  labels[key] = document.getElementById(id);
+});
 
 init();
 loadHDRI();
@@ -381,7 +379,6 @@ function init() {
   });
 
   document.getElementById("copyValues").addEventListener("click", copyValues);
-
   window.addEventListener("resize", onResize);
 
   applySettings();
@@ -394,11 +391,14 @@ function loadHDRI() {
   new RGBELoader().load(
     "./studio_small_09_4k.hdr",
     texture => {
-      const envMap = pmrem.fromEquirectangular(texture).texture;
+      envMap = pmrem.fromEquirectangular(texture).texture;
+
       scene.environment = envMap;
 
       texture.dispose();
       pmrem.dispose();
+
+      applySettings();
     },
     undefined,
     err => {
@@ -417,15 +417,10 @@ function loadModel() {
       model = gltf.scene;
       scene.add(model);
 
-      model.traverse(obj => {
-        if (obj.isMesh) {
-          obj.castShadow = true;
-          obj.receiveShadow = true;
-        }
-      });
-
+      convertMaterialsToPhysical(model);
       frameModel(model);
       applySettings();
+
       document.getElementById("loading").style.display = "none";
     },
     undefined,
@@ -435,6 +430,46 @@ function loadModel() {
         "Fehler beim Laden des Modells.";
     }
   );
+}
+
+function convertMaterialsToPhysical(object) {
+  object.traverse(obj => {
+    if (!obj.isMesh || !obj.material) return;
+
+    obj.castShadow = true;
+    obj.receiveShadow = true;
+
+    const oldMaterials = Array.isArray(obj.material)
+      ? obj.material
+      : [obj.material];
+
+    const newMaterials = oldMaterials.map(oldMat => {
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: oldMat.color ? oldMat.color.clone() : new THREE.Color(0xffffff),
+        map: oldMat.map || null,
+        normalMap: oldMat.normalMap || null,
+        roughnessMap: oldMat.roughnessMap || null,
+        metalnessMap: oldMat.metalnessMap || null,
+        emissiveMap: oldMat.emissiveMap || null,
+        emissive: oldMat.emissive ? oldMat.emissive.clone() : new THREE.Color(0x000000),
+        transparent: oldMat.transparent || false,
+        opacity: oldMat.opacity ?? 1,
+        side: oldMat.side ?? THREE.FrontSide
+      });
+
+      mat.envMap = envMap;
+      mat.envMapIntensity = Number(ui.envMapIntensity.value);
+      mat.roughness = Number(ui.roughness.value);
+      mat.metalness = Number(ui.metalness.value);
+      mat.clearcoat = Number(ui.clearcoat.value);
+      mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
+
+      mat.needsUpdate = true;
+      return mat;
+    });
+
+    obj.material = Array.isArray(obj.material) ? newMaterials : newMaterials[0];
+  });
 }
 
 function frameModel(object) {
@@ -448,7 +483,6 @@ function frameModel(object) {
   object.position.sub(center);
 
   modelSize = Math.max(size.x, size.y, size.z);
-
   updateCamera();
 }
 
@@ -478,14 +512,17 @@ function applySettings() {
           : [obj.material];
 
         materials.forEach(mat => {
+          mat.envMap = envMap;
           mat.envMapIntensity = Number(ui.envMapIntensity.value);
+          mat.roughness = Number(ui.roughness.value);
+          mat.metalness = Number(ui.metalness.value);
 
-          if ("roughness" in mat) {
-            mat.roughness = Number(ui.roughness.value);
+          if ("clearcoat" in mat) {
+            mat.clearcoat = Number(ui.clearcoat.value);
           }
 
-          if ("metalness" in mat) {
-            mat.metalness = Number(ui.metalness.value);
+          if ("clearcoatRoughness" in mat) {
+            mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
           }
 
           mat.needsUpdate = true;
@@ -526,6 +563,8 @@ function updateLabels() {
   labels.envMapIntensity.textContent = Number(ui.envMapIntensity.value).toFixed(2);
   labels.roughness.textContent = Number(ui.roughness.value).toFixed(2);
   labels.metalness.textContent = Number(ui.metalness.value).toFixed(2);
+  labels.clearcoat.textContent = Number(ui.clearcoat.value).toFixed(2);
+  labels.clearcoatRoughness.textContent = Number(ui.clearcoatRoughness.value).toFixed(2);
   labels.hemi.textContent = Number(ui.hemi.value).toFixed(2);
   labels.key.textContent = Number(ui.key.value).toFixed(2);
   labels.fill.textContent = Number(ui.fill.value).toFixed(2);
@@ -547,6 +586,8 @@ function getValuesText() {
     "material.envMapIntensity = " + Number(ui.envMapIntensity.value).toFixed(2),
     "material.roughness = " + Number(ui.roughness.value).toFixed(2),
     "material.metalness = " + Number(ui.metalness.value).toFixed(2),
+    "material.clearcoat = " + Number(ui.clearcoat.value).toFixed(2),
+    "material.clearcoatRoughness = " + Number(ui.clearcoatRoughness.value).toFixed(2),
     "hemiLight.intensity = " + Number(ui.hemi.value).toFixed(2),
     "keyLight.intensity = " + Number(ui.key.value).toFixed(2),
     "fillLight.intensity = " + Number(ui.fill.value).toFixed(2),
