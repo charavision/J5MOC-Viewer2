@@ -85,19 +85,18 @@ controls.dampingFactor = 0.05;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.6;
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x111111, 0.8);
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x111111, 0.6);
 scene.add(hemiLight);
 
-const keyLight = new THREE.DirectionalLight(0xffffff, 3.2);
+const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
 keyLight.position.set(6, 8, 5);
-keyLight.castShadow = true;
 scene.add(keyLight);
 
-const fillLight = new THREE.DirectionalLight(0xffffff, 1.1);
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
 fillLight.position.set(-5, 3, -4);
 scene.add(fillLight);
 
-const rimLight = new THREE.DirectionalLight(0xffffff, 2.5);
+const rimLight = new THREE.DirectionalLight(0xffffff, 1.8);
 rimLight.position.set(-6, 4, 8);
 scene.add(rimLight);
 
@@ -109,7 +108,7 @@ function loadHDRI() {
   pmrem.compileEquirectangularShader();
 
   new RGBELoader().load(
-    "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr",
+    "./studio_small_09_4k.hdr",
     texture => {
       const envMap = pmrem.fromEquirectangular(texture).texture;
       scene.environment = envMap;
@@ -119,7 +118,7 @@ function loadHDRI() {
     },
     undefined,
     err => {
-      console.warn("HDRI konnte nicht geladen werden:", err);
+      console.error("HDRI konnte nicht geladen werden:", err);
     }
   );
 }
@@ -145,7 +144,8 @@ function loadModel() {
               : [obj.material];
 
             materials.forEach(mat => {
-              mat.envMapIntensity = 2.0;
+              mat.envMapIntensity = 2.4;
+              mat.roughness = Math.max(mat.roughness ?? 0.35, 0.28);
               mat.needsUpdate = true;
             });
           }
@@ -175,10 +175,10 @@ function frameModel(object) {
   object.position.sub(center);
 
   const maxDim = Math.max(size.x, size.y, size.z);
-  const distance = maxDim * 1.7;
+  const distance = maxDim * 1.65;
 
   camera.position.set(
-    distance * 0.8,
+    distance * 0.85,
     distance * 0.38,
     distance
   );
