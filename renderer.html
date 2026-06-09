@@ -590,8 +590,14 @@ function updateBackgroundLogo() {
   bgLogoSprite.position.copy(position);
   bgLogoSprite.quaternion.copy(camera.quaternion);
 
-  const aspect = window.innerWidth / window.innerHeight;
-  bgLogoSprite.scale.set(modelSize * scale * aspect, modelSize * scale, 1);
+const imageAspect =
+  bgLogoSprite.material.map.image.width /
+  bgLogoSprite.material.map.image.height;
+
+const logoHeight = modelSize * scale;
+const logoWidth = logoHeight * imageAspect;
+
+bgLogoSprite.scale.set(logoWidth, logoHeight, 1);
 }
 
 function loadModel() {
