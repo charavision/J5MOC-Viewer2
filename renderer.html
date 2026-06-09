@@ -45,7 +45,7 @@ canvas {
   top: 14px;
   left: 14px;
   z-index: 10;
-  width: 350px;
+  width: 360px;
   max-height: calc(100vh - 28px);
   overflow-y: auto;
   background: rgba(0,0,0,0.78);
@@ -101,7 +101,8 @@ input[type="color"] {
   background: transparent;
 }
 
-button {
+button, .file-label {
+  display: block;
   width: 100%;
   margin-top: 8px;
   padding: 9px;
@@ -111,11 +112,22 @@ button {
   color: #111;
   font-weight: 700;
   cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 13px;
+}
+
+button:hover, .file-label:hover {
+  background: #dddddd;
+}
+
+#importXml {
+  display: none;
 }
 
 textarea {
   width: 100%;
-  height: 150px;
+  height: 170px;
   margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.08);
@@ -136,6 +148,13 @@ textarea {
   <h1>J5MOC Renderer Controls</h1>
 
   <div class="group">
+    <div class="group-title">Preset XML</div>
+    <label class="file-label" for="importXml">Import value.xml</label>
+    <input id="importXml" type="file" accept=".xml">
+    <button id="exportXml">Export / Download value.xml</button>
+  </div>
+
+  <div class="group">
     <div class="group-title">Renderer</div>
 
     <div class="control">
@@ -150,11 +169,16 @@ textarea {
   </div>
 
   <div class="group">
-    <div class="group-title">HDR / Reflection</div>
+    <div class="group-title">HDR / Reflection / GI Fake</div>
 
     <div class="control">
       <div class="row"><span>EnvMap Intensity</span><span id="vEnvMap" class="value"></span></div>
       <input id="envMapIntensity" type="range" min="0" max="10" step="0.05" value="5.00">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Global Illumination</span><span id="vGI" class="value"></span></div>
+      <input id="giIntensity" type="range" min="0" max="5" step="0.01" value="0.80">
     </div>
 
     <div class="control">
@@ -209,6 +233,30 @@ textarea {
     <div class="control">
       <div class="row"><span>Rim Light</span><span id="vRim" class="value"></span></div>
       <input id="rim" type="range" min="0" max="5" step="0.01" value="0.55">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Shadow</div>
+
+    <div class="control">
+      <div class="row"><span>Shadow Density</span><span id="vShadowDensity" class="value"></span></div>
+      <input id="shadowDensity" type="range" min="0" max="1" step="0.01" value="0.35">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Shadow Softness</span><span id="vShadowSoftness" class="value"></span></div>
+      <input id="shadowSoftness" type="range" min="0.5" max="12" step="0.1" value="4.0">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Shadow Size</span><span id="vShadowSize" class="value"></span></div>
+      <input id="shadowSize" type="range" min="0.5" max="5" step="0.05" value="2.0">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Shadow Y Offset</span><span id="vShadowYOffset" class="value"></span></div>
+      <input id="shadowYOffset" type="range" min="-1" max="1" step="0.01" value="-0.02">
     </div>
   </div>
 
@@ -282,14 +330,18 @@ let model = null;
 let modelSize = 10;
 let hdrTexture = null;
 
-let hemiLight, keyLight, fillLight, rimLight;
+let hemiLight, keyLight, fillLight, rimLight, giLight;
 let bloomPass;
+let shadowPlane;
+let shadowMaterial;
 
 const ids = [
   "exposure", "background",
-  "envMapIntensity", "roughness", "metalness",
+  "envMapIntensity", "giIntensity",
+  "roughness", "metalness",
   "clearcoat", "clearcoatRoughness", "reflectivity", "specularIntensity",
   "hemi", "key", "fill", "rim",
+  "shadowDensity", "shadowSoftness", "shadowSize", "shadowYOffset",
   "bloomStrength", "bloomRadius", "bloomThreshold",
   "distance", "height", "angle", "fov", "rotateSpeed"
 ];
@@ -301,6 +353,7 @@ const labels = {
   exposure: document.getElementById("vExposure"),
   background: document.getElementById("vBackground"),
   envMapIntensity: document.getElementById("vEnvMap"),
+  giIntensity: document.getElementById("vGI"),
   roughness: document.getElementById("vRoughness"),
   metalness: document.getElementById("vMetalness"),
   clearcoat: document.getElementById("vClearcoat"),
@@ -311,6 +364,10 @@ const labels = {
   key: document.getElementById("vKey"),
   fill: document.getElementById("vFill"),
   rim: document.getElementById("vRim"),
+  shadowDensity: document.getElementById("vShadowDensity"),
+  shadowSoftness: document.getElementById("vShadowSoftness"),
+  shadowSize: document.getElementById("vShadowSize"),
+  shadowYOffset: document.getElementById("vShadowYOffset"),
   bloomStrength: document.getElementById("vBloomStrength"),
   bloomRadius: document.getElementById("vBloomRadius"),
   bloomThreshold: document.getElementById("vBloomThreshold"),
@@ -376,6 +433,9 @@ function init() {
 
   keyLight = new THREE.DirectionalLight(0xffffff, Number(ui.key.value));
   keyLight.position.set(6, 8, 5);
+  keyLight.castShadow = true;
+  keyLight.shadow.mapSize.width = 2048;
+  keyLight.shadow.mapSize.height = 2048;
   scene.add(keyLight);
 
   fillLight = new THREE.DirectionalLight(0xffffff, Number(ui.fill.value));
@@ -386,15 +446,74 @@ function init() {
   rimLight.position.set(-6, 4, 8);
   scene.add(rimLight);
 
+  giLight = new THREE.HemisphereLight(0xffffff, 0x222222, Number(ui.giIntensity.value));
+  scene.add(giLight);
+
+  createFakeContactShadow();
+
   Object.values(ui).forEach(input => {
     input.addEventListener("input", applySettings);
   });
 
   document.getElementById("copyValues").addEventListener("click", copyValues);
+  document.getElementById("exportXml").addEventListener("click", exportXML);
+  document.getElementById("importXml").addEventListener("change", importXML);
 
   window.addEventListener("resize", onResize);
 
   applySettings();
+}
+
+function createFakeContactShadow() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createRadialGradient(256, 256, 10, 256, 256, 250);
+
+  gradient.addColorStop(0.0, "rgba(0,0,0,1)");
+  gradient.addColorStop(0.35, "rgba(0,0,0,0.45)");
+  gradient.addColorStop(0.7, "rgba(0,0,0,0.12)");
+  gradient.addColorStop(1.0, "rgba(0,0,0,0)");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 512, 512);
+
+  const shadowTexture = new THREE.CanvasTexture(canvas);
+  shadowTexture.colorSpace = THREE.SRGBColorSpace;
+
+  shadowMaterial = new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    opacity: Number(ui.shadowDensity.value),
+    depthWrite: false
+  });
+
+  shadowPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    shadowMaterial
+  );
+
+  shadowPlane.rotation.x = -Math.PI / 2;
+  shadowPlane.renderOrder = -1;
+  scene.add(shadowPlane);
+}
+
+function updateFakeShadow() {
+  if (!shadowPlane || !shadowMaterial) return;
+
+  const density = Number(ui.shadowDensity.value);
+  const softness = Number(ui.shadowSoftness.value);
+  const size = Number(ui.shadowSize.value);
+  const yOffset = Number(ui.shadowYOffset.value);
+
+  shadowMaterial.opacity = density;
+
+  const scale = modelSize * size * softness * 0.18;
+  shadowPlane.scale.set(scale, scale, scale);
+
+  shadowPlane.position.set(0, -modelSize * 0.48 + yOffset * modelSize, 0);
 }
 
 function loadHDRI() {
@@ -488,7 +607,9 @@ function frameModel(object) {
   object.position.sub(center);
 
   modelSize = Math.max(size.x, size.y, size.z);
+
   updateCamera();
+  updateFakeShadow();
 }
 
 function applySettings() {
@@ -500,6 +621,10 @@ function applySettings() {
   keyLight.intensity = Number(ui.key.value);
   fillLight.intensity = Number(ui.fill.value);
   rimLight.intensity = Number(ui.rim.value);
+  giLight.intensity = Number(ui.giIntensity.value);
+
+  keyLight.shadow.radius = Number(ui.shadowSoftness.value);
+  keyLight.shadow.bias = -0.0001;
 
   bloomPass.strength = Number(ui.bloomStrength.value);
   bloomPass.radius = Number(ui.bloomRadius.value);
@@ -545,6 +670,7 @@ function applySettings() {
     });
 
     updateCamera();
+    updateFakeShadow();
   }
 
   updateLabels();
@@ -575,6 +701,7 @@ function updateLabels() {
   labels.exposure.textContent = Number(ui.exposure.value).toFixed(2);
   labels.background.textContent = ui.background.value;
   labels.envMapIntensity.textContent = Number(ui.envMapIntensity.value).toFixed(2);
+  labels.giIntensity.textContent = Number(ui.giIntensity.value).toFixed(2);
   labels.roughness.textContent = Number(ui.roughness.value).toFixed(2);
   labels.metalness.textContent = Number(ui.metalness.value).toFixed(2);
   labels.clearcoat.textContent = Number(ui.clearcoat.value).toFixed(2);
@@ -585,6 +712,10 @@ function updateLabels() {
   labels.key.textContent = Number(ui.key.value).toFixed(2);
   labels.fill.textContent = Number(ui.fill.value).toFixed(2);
   labels.rim.textContent = Number(ui.rim.value).toFixed(2);
+  labels.shadowDensity.textContent = Number(ui.shadowDensity.value).toFixed(2);
+  labels.shadowSoftness.textContent = Number(ui.shadowSoftness.value).toFixed(2);
+  labels.shadowSize.textContent = Number(ui.shadowSize.value).toFixed(2);
+  labels.shadowYOffset.textContent = Number(ui.shadowYOffset.value).toFixed(2);
   labels.bloomStrength.textContent = Number(ui.bloomStrength.value).toFixed(2);
   labels.bloomRadius.textContent = Number(ui.bloomRadius.value).toFixed(2);
   labels.bloomThreshold.textContent = Number(ui.bloomThreshold.value).toFixed(2);
@@ -595,29 +726,44 @@ function updateLabels() {
   labels.rotateSpeed.textContent = Number(ui.rotateSpeed.value).toFixed(2);
 }
 
+function getValuesObject() {
+  const obj = {};
+  ids.forEach(id => {
+    obj[id] = ui[id].value;
+  });
+  return obj;
+}
+
 function getValuesText() {
+  const values = getValuesObject();
+
   return [
-    "renderer.toneMappingExposure = " + Number(ui.exposure.value).toFixed(2),
-    "background = " + ui.background.value,
-    "material.envMapIntensity = " + Number(ui.envMapIntensity.value).toFixed(2),
-    "material.roughness = " + Number(ui.roughness.value).toFixed(2),
-    "material.metalness = " + Number(ui.metalness.value).toFixed(2),
-    "material.clearcoat = " + Number(ui.clearcoat.value).toFixed(2),
-    "material.clearcoatRoughness = " + Number(ui.clearcoatRoughness.value).toFixed(2),
-    "material.reflectivity = " + Number(ui.reflectivity.value).toFixed(2),
-    "material.specularIntensity = " + Number(ui.specularIntensity.value).toFixed(2),
-    "hemiLight.intensity = " + Number(ui.hemi.value).toFixed(2),
-    "keyLight.intensity = " + Number(ui.key.value).toFixed(2),
-    "fillLight.intensity = " + Number(ui.fill.value).toFixed(2),
-    "rimLight.intensity = " + Number(ui.rim.value).toFixed(2),
-    "bloom.strength = " + Number(ui.bloomStrength.value).toFixed(2),
-    "bloom.radius = " + Number(ui.bloomRadius.value).toFixed(2),
-    "bloom.threshold = " + Number(ui.bloomThreshold.value).toFixed(2),
-    "camera.distance = " + Number(ui.distance.value).toFixed(2),
-    "camera.height = " + Number(ui.height.value).toFixed(2),
-    "camera.angle = " + ui.angle.value,
-    "camera.fov = " + ui.fov.value,
-    "controls.autoRotateSpeed = " + Number(ui.rotateSpeed.value).toFixed(2)
+    "renderer.toneMappingExposure = " + Number(values.exposure).toFixed(2),
+    "background = " + values.background,
+    "material.envMapIntensity = " + Number(values.envMapIntensity).toFixed(2),
+    "globalIllumination.fakeIntensity = " + Number(values.giIntensity).toFixed(2),
+    "material.roughness = " + Number(values.roughness).toFixed(2),
+    "material.metalness = " + Number(values.metalness).toFixed(2),
+    "material.clearcoat = " + Number(values.clearcoat).toFixed(2),
+    "material.clearcoatRoughness = " + Number(values.clearcoatRoughness).toFixed(2),
+    "material.reflectivity = " + Number(values.reflectivity).toFixed(2),
+    "material.specularIntensity = " + Number(values.specularIntensity).toFixed(2),
+    "hemiLight.intensity = " + Number(values.hemi).toFixed(2),
+    "keyLight.intensity = " + Number(values.key).toFixed(2),
+    "fillLight.intensity = " + Number(values.fill).toFixed(2),
+    "rimLight.intensity = " + Number(values.rim).toFixed(2),
+    "shadow.density = " + Number(values.shadowDensity).toFixed(2),
+    "shadow.softness = " + Number(values.shadowSoftness).toFixed(2),
+    "shadow.size = " + Number(values.shadowSize).toFixed(2),
+    "shadow.yOffset = " + Number(values.shadowYOffset).toFixed(2),
+    "bloom.strength = " + Number(values.bloomStrength).toFixed(2),
+    "bloom.radius = " + Number(values.bloomRadius).toFixed(2),
+    "bloom.threshold = " + Number(values.bloomThreshold).toFixed(2),
+    "camera.distance = " + Number(values.distance).toFixed(2),
+    "camera.height = " + Number(values.height).toFixed(2),
+    "camera.angle = " + values.angle,
+    "camera.fov = " + values.fov,
+    "controls.autoRotateSpeed = " + Number(values.rotateSpeed).toFixed(2)
   ].join("\n");
 }
 
@@ -634,6 +780,61 @@ async function copyValues() {
   } catch (e) {
     console.warn("Clipboard nicht verfügbar:", e);
   }
+}
+
+function exportXML() {
+  const values = getValuesObject();
+
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<j5mocRendererSettings>\n';
+
+  ids.forEach(id => {
+    xml += `  <${id}>${escapeXML(values[id])}</${id}>\n`;
+  });
+
+  xml += '</j5mocRendererSettings>\n';
+
+  const blob = new Blob([xml], { type: "application/xml" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "value.xml";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function importXML(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = e => {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(e.target.result, "application/xml");
+
+    ids.forEach(id => {
+      const node = xml.querySelector(id);
+      if (node && ui[id]) {
+        ui[id].value = node.textContent;
+      }
+    });
+
+    applySettings();
+  };
+
+  reader.readAsText(file);
+}
+
+function escapeXML(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
 
 function onResize() {
