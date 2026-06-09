@@ -24,9 +24,7 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas {
-  display: block;
-}
+canvas { display: block; }
 
 #loading {
   position: fixed;
@@ -45,7 +43,7 @@ canvas {
   top: 14px;
   left: 14px;
   z-index: 10;
-  width: 360px;
+  width: 370px;
   max-height: calc(100vh - 28px);
   overflow-y: auto;
   background: rgba(0,0,0,0.78);
@@ -74,9 +72,7 @@ h1 {
   margin-bottom: 8px;
 }
 
-.control {
-  margin: 9px 0;
-}
+.control { margin: 9px 0; }
 
 .row {
   display: flex;
@@ -90,9 +86,7 @@ h1 {
   font-variant-numeric: tabular-nums;
 }
 
-input[type="range"] {
-  width: 100%;
-}
+input[type="range"] { width: 100%; }
 
 input[type="color"] {
   width: 100%;
@@ -117,17 +111,11 @@ button, .file-label {
   font-size: 13px;
 }
 
-button:hover, .file-label:hover {
-  background: #dddddd;
-}
-
-#importXml {
-  display: none;
-}
+#importXml { display: none; }
 
 textarea {
   width: 100%;
-  height: 170px;
+  height: 190px;
   margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.08);
@@ -169,7 +157,7 @@ textarea {
   </div>
 
   <div class="group">
-    <div class="group-title">HDR / Reflection / GI Fake</div>
+    <div class="group-title">HDR / Material</div>
 
     <div class="control">
       <div class="row"><span>EnvMap Intensity</span><span id="vEnvMap" class="value"></span></div>
@@ -177,12 +165,12 @@ textarea {
     </div>
 
     <div class="control">
-      <div class="row"><span>Global Illumination</span><span id="vGI" class="value"></span></div>
+      <div class="row"><span>Global Illumination Fake</span><span id="vGI" class="value"></span></div>
       <input id="giIntensity" type="range" min="0" max="5" step="0.01" value="0.80">
     </div>
 
     <div class="control">
-      <div class="row"><span>Roughness</span><span id="vRoughness" class="value"></span></div>
+      <div class="row"><span>Base Roughness</span><span id="vRoughness" class="value"></span></div>
       <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.18">
     </div>
 
@@ -209,6 +197,45 @@ textarea {
     <div class="control">
       <div class="row"><span>Specular Intensity</span><span id="vSpecularIntensity" class="value"></span></div>
       <input id="specularIntensity" type="range" min="0" max="3" step="0.01" value="1.20">
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Surface Textures</div>
+
+    <div class="control">
+      <div class="row"><span>Fingerprints Color</span><span id="vFingerprintColor" class="value"></span></div>
+      <input id="fingerprintColor" type="range" min="0" max="1" step="0.01" value="0.12">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Fingerprints Roughness</span><span id="vFingerprintRoughness" class="value"></span></div>
+      <input id="fingerprintRoughness" type="range" min="0" max="1" step="0.01" value="0.35">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Fingerprints Opacity</span><span id="vFingerprintOpacity" class="value"></span></div>
+      <input id="fingerprintOpacity" type="range" min="0" max="1" step="0.01" value="0.25">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Scratches Intensity</span><span id="vScratches" class="value"></span></div>
+      <input id="scratches" type="range" min="0" max="1" step="0.01" value="0.18">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Plastic Bump</span><span id="vPlasticBump" class="value"></span></div>
+      <input id="plasticBump" type="range" min="0" max="0.2" step="0.001" value="0.025">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Metal Bump</span><span id="vMetalBump" class="value"></span></div>
+      <input id="metalBump" type="range" min="0" max="0.2" step="0.001" value="0.010">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Texture Scale</span><span id="vTextureScale" class="value"></span></div>
+      <input id="textureScale" type="range" min="0.2" max="10" step="0.1" value="2.5">
     </div>
   </div>
 
@@ -335,11 +362,22 @@ let bloomPass;
 let shadowPlane;
 let shadowMaterial;
 
+const textureLoader = new THREE.TextureLoader();
+
+const surfaceMaps = {
+  fingerprintsColor: null,
+  fingerprintsOpacity: null,
+  fingerprintsRoughness: null,
+  scratches: null,
+  metalDisplacement: null,
+  plasticDisplacement: null
+};
+
 const ids = [
   "exposure", "background",
   "envMapIntensity", "giIntensity",
-  "roughness", "metalness",
-  "clearcoat", "clearcoatRoughness", "reflectivity", "specularIntensity",
+  "roughness", "metalness", "clearcoat", "clearcoatRoughness", "reflectivity", "specularIntensity",
+  "fingerprintColor", "fingerprintRoughness", "fingerprintOpacity", "scratches", "plasticBump", "metalBump", "textureScale",
   "hemi", "key", "fill", "rim",
   "shadowDensity", "shadowSoftness", "shadowSize", "shadowYOffset",
   "bloomStrength", "bloomRadius", "bloomThreshold",
@@ -349,36 +387,25 @@ const ids = [
 const ui = {};
 ids.forEach(id => ui[id] = document.getElementById(id));
 
-const labels = {
-  exposure: document.getElementById("vExposure"),
-  background: document.getElementById("vBackground"),
-  envMapIntensity: document.getElementById("vEnvMap"),
-  giIntensity: document.getElementById("vGI"),
-  roughness: document.getElementById("vRoughness"),
-  metalness: document.getElementById("vMetalness"),
-  clearcoat: document.getElementById("vClearcoat"),
-  clearcoatRoughness: document.getElementById("vClearcoatRoughness"),
-  reflectivity: document.getElementById("vReflectivity"),
-  specularIntensity: document.getElementById("vSpecularIntensity"),
-  hemi: document.getElementById("vHemi"),
-  key: document.getElementById("vKey"),
-  fill: document.getElementById("vFill"),
-  rim: document.getElementById("vRim"),
-  shadowDensity: document.getElementById("vShadowDensity"),
-  shadowSoftness: document.getElementById("vShadowSoftness"),
-  shadowSize: document.getElementById("vShadowSize"),
-  shadowYOffset: document.getElementById("vShadowYOffset"),
-  bloomStrength: document.getElementById("vBloomStrength"),
-  bloomRadius: document.getElementById("vBloomRadius"),
-  bloomThreshold: document.getElementById("vBloomThreshold"),
-  distance: document.getElementById("vDistance"),
-  height: document.getElementById("vHeight"),
-  angle: document.getElementById("vAngle"),
-  fov: document.getElementById("vFov"),
-  rotateSpeed: document.getElementById("vRotate")
-};
+const labels = {};
+ids.forEach(id => {
+  const labelId = "v" + id.charAt(0).toUpperCase() + id.slice(1);
+  const direct = document.getElementById(labelId);
+  if (direct) labels[id] = direct;
+});
+
+labels.envMapIntensity = document.getElementById("vEnvMap");
+labels.giIntensity = document.getElementById("vGI");
+labels.fingerprintColor = document.getElementById("vFingerprintColor");
+labels.fingerprintRoughness = document.getElementById("vFingerprintRoughness");
+labels.fingerprintOpacity = document.getElementById("vFingerprintOpacity");
+labels.scratches = document.getElementById("vScratches");
+labels.plasticBump = document.getElementById("vPlasticBump");
+labels.metalBump = document.getElementById("vMetalBump");
+labels.textureScale = document.getElementById("vTextureScale");
 
 init();
+loadSurfaceTextures();
 loadHDRI();
 loadModel();
 animate();
@@ -394,11 +421,7 @@ function init() {
     100000
   );
 
-  renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: false
-  });
-
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -406,7 +429,6 @@ function init() {
   renderer.toneMappingExposure = Number(ui.exposure.value);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
   document.body.appendChild(renderer.domElement);
 
   composer = new EffectComposer(renderer);
@@ -451,9 +473,7 @@ function init() {
 
   createFakeContactShadow();
 
-  Object.values(ui).forEach(input => {
-    input.addEventListener("input", applySettings);
-  });
+  Object.values(ui).forEach(input => input.addEventListener("input", applySettings));
 
   document.getElementById("copyValues").addEventListener("click", copyValues);
   document.getElementById("exportXml").addEventListener("click", exportXML);
@@ -464,6 +484,23 @@ function init() {
   applySettings();
 }
 
+function loadTexture(path, srgb = false) {
+  const tex = textureLoader.load(path, () => applySettings());
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+  return tex;
+}
+
+function loadSurfaceTextures() {
+  surfaceMaps.fingerprintsColor = loadTexture("./textures/Fingerprints003_4K_Color.jpg", true);
+  surfaceMaps.fingerprintsOpacity = loadTexture("./textures/Fingerprints003_4K_Opacity.jpg", false);
+  surfaceMaps.fingerprintsRoughness = loadTexture("./textures/Fingerprints003_4K_Roughness.jpg", false);
+  surfaceMaps.scratches = loadTexture("./textures/Scratches003_4K_var2.jpg", false);
+  surfaceMaps.metalDisplacement = loadTexture("./textures/Metal015_4K-JPG_Displacement.jpg", false);
+  surfaceMaps.plasticDisplacement = loadTexture("./textures/Plastic015B_4K-JPG_Displacement.jpg", false);
+}
+
 function createFakeContactShadow() {
   const canvas = document.createElement("canvas");
   canvas.width = 512;
@@ -471,7 +508,6 @@ function createFakeContactShadow() {
 
   const ctx = canvas.getContext("2d");
   const gradient = ctx.createRadialGradient(256, 256, 10, 256, 256, 250);
-
   gradient.addColorStop(0.0, "rgba(0,0,0,1)");
   gradient.addColorStop(0.35, "rgba(0,0,0,0.45)");
   gradient.addColorStop(0.7, "rgba(0,0,0,0.12)");
@@ -490,11 +526,7 @@ function createFakeContactShadow() {
     depthWrite: false
   });
 
-  shadowPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
-    shadowMaterial
-  );
-
+  shadowPlane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), shadowMaterial);
   shadowPlane.rotation.x = -Math.PI / 2;
   shadowPlane.renderOrder = -1;
   scene.add(shadowPlane);
@@ -512,7 +544,6 @@ function updateFakeShadow() {
 
   const scale = modelSize * size * softness * 0.18;
   shadowPlane.scale.set(scale, scale, scale);
-
   shadowPlane.position.set(0, -modelSize * 0.48 + yOffset * modelSize, 0);
 }
 
@@ -521,18 +552,13 @@ function loadHDRI() {
     "./studio_small_09_4k.hdr",
     texture => {
       texture.mapping = THREE.EquirectangularReflectionMapping;
-
       hdrTexture = texture;
-
       scene.environment = hdrTexture;
       scene.background = new THREE.Color(ui.background.value);
-
       applySettings();
     },
     undefined,
-    err => {
-      console.error("HDRI konnte nicht geladen werden:", err);
-    }
+    err => console.error("HDRI konnte nicht geladen werden:", err)
   );
 }
 
@@ -555,8 +581,7 @@ function loadModel() {
     undefined,
     error => {
       console.error(error);
-      document.getElementById("loading").innerText =
-        "Fehler beim Laden des Modells.";
+      document.getElementById("loading").innerText = "Fehler beim Laden des Modells.";
     }
   );
 }
@@ -568,9 +593,7 @@ function convertMaterialsToPhysical(object) {
     obj.castShadow = true;
     obj.receiveShadow = true;
 
-    const oldMaterials = Array.isArray(obj.material)
-      ? obj.material
-      : [obj.material];
+    const oldMaterials = Array.isArray(obj.material) ? obj.material : [obj.material];
 
     const newMaterials = oldMaterials.map(oldMat => {
       const mat = new THREE.MeshPhysicalMaterial({
@@ -605,16 +628,60 @@ function frameModel(object) {
   box.getSize(size);
 
   object.position.sub(center);
-
   modelSize = Math.max(size.x, size.y, size.z);
 
   updateCamera();
   updateFakeShadow();
 }
 
+function applyTextureSettings(mat) {
+  const scale = Number(ui.textureScale.value);
+
+  Object.values(surfaceMaps).forEach(tex => {
+    if (tex) tex.repeat.set(scale, scale);
+  });
+
+  const fpColor = Number(ui.fingerprintColor.value);
+  const fpRough = Number(ui.fingerprintRoughness.value);
+  const fpOpacity = Number(ui.fingerprintOpacity.value);
+  const scratch = Number(ui.scratches.value);
+  const plasticBump = Number(ui.plasticBump.value);
+  const metalBump = Number(ui.metalBump.value);
+
+  const baseRough = Number(ui.roughness.value);
+  const combinedRoughness = Math.min(1, baseRough + fpRough * 0.35 + scratch * 0.28);
+
+  mat.roughness = combinedRoughness;
+
+  if (scratch > 0.01) {
+    mat.bumpMap = surfaceMaps.scratches;
+    mat.bumpScale = scratch * 0.045 + plasticBump;
+  } else if (plasticBump > 0.001) {
+    mat.bumpMap = surfaceMaps.plasticDisplacement;
+    mat.bumpScale = plasticBump;
+  } else {
+    mat.bumpMap = null;
+    mat.bumpScale = 0;
+  }
+
+  if (mat.color && fpColor > 0.01) {
+    const darken = 1 - fpColor * fpOpacity * 0.35;
+    mat.color.multiplyScalar(darken);
+  }
+
+  mat.userData.surfaceSettings = {
+    fingerprintColor: fpColor,
+    fingerprintRoughness: fpRough,
+    fingerprintOpacity: fpOpacity,
+    scratches: scratch,
+    plasticBump,
+    metalBump,
+    textureScale: scale
+  };
+}
+
 function applySettings() {
   renderer.toneMappingExposure = Number(ui.exposure.value);
-
   scene.background = new THREE.Color(ui.background.value);
 
   hemiLight.intensity = Number(ui.hemi.value);
@@ -638,31 +705,19 @@ function applySettings() {
   if (model) {
     model.traverse(obj => {
       if (obj.isMesh && obj.material) {
-        const materials = Array.isArray(obj.material)
-          ? obj.material
-          : [obj.material];
+        const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
 
         materials.forEach(mat => {
           mat.envMap = hdrTexture;
           mat.envMapIntensity = Number(ui.envMapIntensity.value);
-          mat.roughness = Number(ui.roughness.value);
           mat.metalness = Number(ui.metalness.value);
 
-          if ("clearcoat" in mat) {
-            mat.clearcoat = Number(ui.clearcoat.value);
-          }
+          if ("clearcoat" in mat) mat.clearcoat = Number(ui.clearcoat.value);
+          if ("clearcoatRoughness" in mat) mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
+          if ("reflectivity" in mat) mat.reflectivity = Number(ui.reflectivity.value);
+          if ("specularIntensity" in mat) mat.specularIntensity = Number(ui.specularIntensity.value);
 
-          if ("clearcoatRoughness" in mat) {
-            mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
-          }
-
-          if ("reflectivity" in mat) {
-            mat.reflectivity = Number(ui.reflectivity.value);
-          }
-
-          if ("specularIntensity" in mat) {
-            mat.specularIntensity = Number(ui.specularIntensity.value);
-          }
+          applyTextureSettings(mat);
 
           mat.needsUpdate = true;
         });
@@ -698,73 +753,26 @@ function updateCamera() {
 }
 
 function updateLabels() {
-  labels.exposure.textContent = Number(ui.exposure.value).toFixed(2);
-  labels.background.textContent = ui.background.value;
-  labels.envMapIntensity.textContent = Number(ui.envMapIntensity.value).toFixed(2);
-  labels.giIntensity.textContent = Number(ui.giIntensity.value).toFixed(2);
-  labels.roughness.textContent = Number(ui.roughness.value).toFixed(2);
-  labels.metalness.textContent = Number(ui.metalness.value).toFixed(2);
-  labels.clearcoat.textContent = Number(ui.clearcoat.value).toFixed(2);
-  labels.clearcoatRoughness.textContent = Number(ui.clearcoatRoughness.value).toFixed(2);
-  labels.reflectivity.textContent = Number(ui.reflectivity.value).toFixed(2);
-  labels.specularIntensity.textContent = Number(ui.specularIntensity.value).toFixed(2);
-  labels.hemi.textContent = Number(ui.hemi.value).toFixed(2);
-  labels.key.textContent = Number(ui.key.value).toFixed(2);
-  labels.fill.textContent = Number(ui.fill.value).toFixed(2);
-  labels.rim.textContent = Number(ui.rim.value).toFixed(2);
-  labels.shadowDensity.textContent = Number(ui.shadowDensity.value).toFixed(2);
-  labels.shadowSoftness.textContent = Number(ui.shadowSoftness.value).toFixed(2);
-  labels.shadowSize.textContent = Number(ui.shadowSize.value).toFixed(2);
-  labels.shadowYOffset.textContent = Number(ui.shadowYOffset.value).toFixed(2);
-  labels.bloomStrength.textContent = Number(ui.bloomStrength.value).toFixed(2);
-  labels.bloomRadius.textContent = Number(ui.bloomRadius.value).toFixed(2);
-  labels.bloomThreshold.textContent = Number(ui.bloomThreshold.value).toFixed(2);
-  labels.distance.textContent = Number(ui.distance.value).toFixed(2);
-  labels.height.textContent = Number(ui.height.value).toFixed(2);
-  labels.angle.textContent = ui.angle.value + "°";
-  labels.fov.textContent = ui.fov.value + "°";
-  labels.rotateSpeed.textContent = Number(ui.rotateSpeed.value).toFixed(2);
+  ids.forEach(id => {
+    if (!labels[id]) return;
+    const val = ui[id].value;
+
+    if (id === "background") labels[id].textContent = val;
+    else if (id === "angle" || id === "fov") labels[id].textContent = val + "°";
+    else labels[id].textContent = Number(val).toFixed(2);
+  });
 }
 
 function getValuesObject() {
   const obj = {};
-  ids.forEach(id => {
-    obj[id] = ui[id].value;
-  });
+  ids.forEach(id => obj[id] = ui[id].value);
   return obj;
 }
 
 function getValuesText() {
   const values = getValuesObject();
 
-  return [
-    "renderer.toneMappingExposure = " + Number(values.exposure).toFixed(2),
-    "background = " + values.background,
-    "material.envMapIntensity = " + Number(values.envMapIntensity).toFixed(2),
-    "globalIllumination.fakeIntensity = " + Number(values.giIntensity).toFixed(2),
-    "material.roughness = " + Number(values.roughness).toFixed(2),
-    "material.metalness = " + Number(values.metalness).toFixed(2),
-    "material.clearcoat = " + Number(values.clearcoat).toFixed(2),
-    "material.clearcoatRoughness = " + Number(values.clearcoatRoughness).toFixed(2),
-    "material.reflectivity = " + Number(values.reflectivity).toFixed(2),
-    "material.specularIntensity = " + Number(values.specularIntensity).toFixed(2),
-    "hemiLight.intensity = " + Number(values.hemi).toFixed(2),
-    "keyLight.intensity = " + Number(values.key).toFixed(2),
-    "fillLight.intensity = " + Number(values.fill).toFixed(2),
-    "rimLight.intensity = " + Number(values.rim).toFixed(2),
-    "shadow.density = " + Number(values.shadowDensity).toFixed(2),
-    "shadow.softness = " + Number(values.shadowSoftness).toFixed(2),
-    "shadow.size = " + Number(values.shadowSize).toFixed(2),
-    "shadow.yOffset = " + Number(values.shadowYOffset).toFixed(2),
-    "bloom.strength = " + Number(values.bloomStrength).toFixed(2),
-    "bloom.radius = " + Number(values.bloomRadius).toFixed(2),
-    "bloom.threshold = " + Number(values.bloomThreshold).toFixed(2),
-    "camera.distance = " + Number(values.distance).toFixed(2),
-    "camera.height = " + Number(values.height).toFixed(2),
-    "camera.angle = " + values.angle,
-    "camera.fov = " + values.fov,
-    "controls.autoRotateSpeed = " + Number(values.rotateSpeed).toFixed(2)
-  ].join("\n");
+  return ids.map(id => `${id} = ${values[id]}`).join("\n");
 }
 
 function updateValuesBox() {
@@ -817,9 +825,7 @@ function importXML(event) {
 
     ids.forEach(id => {
       const node = xml.querySelector(id);
-      if (node && ui[id]) {
-        ui[id].value = node.textContent;
-      }
+      if (node && ui[id]) ui[id].value = node.textContent;
     });
 
     applySettings();
