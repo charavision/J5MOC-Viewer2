@@ -8,7 +8,8 @@
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
 }
 </script>
@@ -23,7 +24,9 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-canvas { display: block; }
+canvas {
+  display: block;
+}
 
 #loading {
   position: fixed;
@@ -42,7 +45,7 @@ canvas { display: block; }
   top: 14px;
   left: 14px;
   z-index: 10;
-  width: 340px;
+  width: 350px;
   max-height: calc(100vh - 28px);
   overflow-y: auto;
   background: rgba(0,0,0,0.78);
@@ -112,7 +115,7 @@ button {
 
 textarea {
   width: 100%;
-  height: 120px;
+  height: 150px;
   margin-top: 10px;
   box-sizing: border-box;
   background: rgba(255,255,255,0.08);
@@ -147,16 +150,16 @@ textarea {
   </div>
 
   <div class="group">
-    <div class="group-title">HDR / Reflections</div>
+    <div class="group-title">HDR / Reflection</div>
 
     <div class="control">
       <div class="row"><span>EnvMap Intensity</span><span id="vEnvMap" class="value"></span></div>
-      <input id="envMapIntensity" type="range" min="0" max="10" step="0.05" value="4.0">
+      <input id="envMapIntensity" type="range" min="0" max="10" step="0.05" value="5.00">
     </div>
 
     <div class="control">
       <div class="row"><span>Roughness</span><span id="vRoughness" class="value"></span></div>
-      <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.22">
+      <input id="roughness" type="range" min="0" max="1" step="0.01" value="0.18">
     </div>
 
     <div class="control">
@@ -166,12 +169,22 @@ textarea {
 
     <div class="control">
       <div class="row"><span>Clearcoat</span><span id="vClearcoat" class="value"></span></div>
-      <input id="clearcoat" type="range" min="0" max="1" step="0.01" value="0.65">
+      <input id="clearcoat" type="range" min="0" max="1" step="0.01" value="0.70">
     </div>
 
     <div class="control">
       <div class="row"><span>Clearcoat Roughness</span><span id="vClearcoatRoughness" class="value"></span></div>
-      <input id="clearcoatRoughness" type="range" min="0" max="1" step="0.01" value="0.18">
+      <input id="clearcoatRoughness" type="range" min="0" max="1" step="0.01" value="0.12">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Reflectivity</span><span id="vReflectivity" class="value"></span></div>
+      <input id="reflectivity" type="range" min="0" max="1" step="0.01" value="0.65">
+    </div>
+
+    <div class="control">
+      <div class="row"><span>Specular Intensity</span><span id="vSpecularIntensity" class="value"></span></div>
+      <input id="specularIntensity" type="range" min="0" max="3" step="0.01" value="1.20">
     </div>
   </div>
 
@@ -180,22 +193,22 @@ textarea {
 
     <div class="control">
       <div class="row"><span>Hemisphere</span><span id="vHemi" class="value"></span></div>
-      <input id="hemi" type="range" min="0" max="3" step="0.01" value="0.15">
+      <input id="hemi" type="range" min="0" max="3" step="0.01" value="0.10">
     </div>
 
     <div class="control">
       <div class="row"><span>Key Light</span><span id="vKey" class="value"></span></div>
-      <input id="key" type="range" min="0" max="6" step="0.01" value="0.8">
+      <input id="key" type="range" min="0" max="6" step="0.01" value="0.65">
     </div>
 
     <div class="control">
       <div class="row"><span>Fill Light</span><span id="vFill" class="value"></span></div>
-      <input id="fill" type="range" min="0" max="4" step="0.01" value="0.25">
+      <input id="fill" type="range" min="0" max="4" step="0.01" value="0.20">
     </div>
 
     <div class="control">
       <div class="row"><span>Rim Light</span><span id="vRim" class="value"></span></div>
-      <input id="rim" type="range" min="0" max="5" step="0.01" value="0.7">
+      <input id="rim" type="range" min="0" max="5" step="0.01" value="0.55">
     </div>
   </div>
 
@@ -204,17 +217,17 @@ textarea {
 
     <div class="control">
       <div class="row"><span>Bloom Strength</span><span id="vBloomStrength" class="value"></span></div>
-      <input id="bloomStrength" type="range" min="0" max="1.5" step="0.01" value="0.05">
+      <input id="bloomStrength" type="range" min="0" max="1.5" step="0.01" value="0.03">
     </div>
 
     <div class="control">
       <div class="row"><span>Bloom Radius</span><span id="vBloomRadius" class="value"></span></div>
-      <input id="bloomRadius" type="range" min="0" max="1" step="0.01" value="0.08">
+      <input id="bloomRadius" type="range" min="0" max="1" step="0.01" value="0.06">
     </div>
 
     <div class="control">
       <div class="row"><span>Bloom Threshold</span><span id="vBloomThreshold" class="value"></span></div>
-      <input id="bloomThreshold" type="range" min="0" max="1" step="0.01" value="0.95">
+      <input id="bloomThreshold" type="range" min="0" max="1" step="0.01" value="0.97">
     </div>
   </div>
 
@@ -223,7 +236,7 @@ textarea {
 
     <div class="control">
       <div class="row"><span>Distance</span><span id="vDistance" class="value"></span></div>
-      <input id="distance" type="range" min="1.0" max="4.0" step="0.01" value="2.2">
+      <input id="distance" type="range" min="1.0" max="4.0" step="0.01" value="2.20">
     </div>
 
     <div class="control">
@@ -254,60 +267,59 @@ textarea {
 <script type="module">
 import * as THREE from "three";
 
-import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
-import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
-import { RGBELoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/RGBELoader.js";
-import { MeshoptDecoder } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/meshopt_decoder.module.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
-import { EffectComposer } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/RenderPass.js";
-import { UnrealBloomPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js";
-import { OutputPass } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/OutputPass.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 
 let scene, camera, renderer, controls, composer;
 let model = null;
 let modelSize = 10;
-let envMap = null;
+let hdrTexture = null;
 
 let hemiLight, keyLight, fillLight, rimLight;
 let bloomPass;
 
-const ui = {};
-const labels = {};
-
-[
+const ids = [
   "exposure", "background",
-  "envMapIntensity", "roughness", "metalness", "clearcoat", "clearcoatRoughness",
+  "envMapIntensity", "roughness", "metalness",
+  "clearcoat", "clearcoatRoughness", "reflectivity", "specularIntensity",
   "hemi", "key", "fill", "rim",
   "bloomStrength", "bloomRadius", "bloomThreshold",
   "distance", "height", "angle", "fov", "rotateSpeed"
-].forEach(id => {
-  ui[id] = document.getElementById(id);
-});
+];
 
-[
-  ["exposure", "vExposure"],
-  ["background", "vBackground"],
-  ["envMapIntensity", "vEnvMap"],
-  ["roughness", "vRoughness"],
-  ["metalness", "vMetalness"],
-  ["clearcoat", "vClearcoat"],
-  ["clearcoatRoughness", "vClearcoatRoughness"],
-  ["hemi", "vHemi"],
-  ["key", "vKey"],
-  ["fill", "vFill"],
-  ["rim", "vRim"],
-  ["bloomStrength", "vBloomStrength"],
-  ["bloomRadius", "vBloomRadius"],
-  ["bloomThreshold", "vBloomThreshold"],
-  ["distance", "vDistance"],
-  ["height", "vHeight"],
-  ["angle", "vAngle"],
-  ["fov", "vFov"],
-  ["rotateSpeed", "vRotate"]
-].forEach(([key, id]) => {
-  labels[key] = document.getElementById(id);
-});
+const ui = {};
+ids.forEach(id => ui[id] = document.getElementById(id));
+
+const labels = {
+  exposure: document.getElementById("vExposure"),
+  background: document.getElementById("vBackground"),
+  envMapIntensity: document.getElementById("vEnvMap"),
+  roughness: document.getElementById("vRoughness"),
+  metalness: document.getElementById("vMetalness"),
+  clearcoat: document.getElementById("vClearcoat"),
+  clearcoatRoughness: document.getElementById("vClearcoatRoughness"),
+  reflectivity: document.getElementById("vReflectivity"),
+  specularIntensity: document.getElementById("vSpecularIntensity"),
+  hemi: document.getElementById("vHemi"),
+  key: document.getElementById("vKey"),
+  fill: document.getElementById("vFill"),
+  rim: document.getElementById("vRim"),
+  bloomStrength: document.getElementById("vBloomStrength"),
+  bloomRadius: document.getElementById("vBloomRadius"),
+  bloomThreshold: document.getElementById("vBloomThreshold"),
+  distance: document.getElementById("vDistance"),
+  height: document.getElementById("vHeight"),
+  angle: document.getElementById("vAngle"),
+  fov: document.getElementById("vFov"),
+  rotateSpeed: document.getElementById("vRotate")
+};
 
 init();
 loadHDRI();
@@ -379,24 +391,22 @@ function init() {
   });
 
   document.getElementById("copyValues").addEventListener("click", copyValues);
+
   window.addEventListener("resize", onResize);
 
   applySettings();
 }
 
 function loadHDRI() {
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  pmrem.compileEquirectangularShader();
-
   new RGBELoader().load(
     "./studio_small_09_4k.hdr",
     texture => {
-      envMap = pmrem.fromEquirectangular(texture).texture;
+      texture.mapping = THREE.EquirectangularReflectionMapping;
 
-      scene.environment = envMap;
+      hdrTexture = texture;
 
-      texture.dispose();
-      pmrem.dispose();
+      scene.environment = hdrTexture;
+      scene.background = new THREE.Color(ui.background.value);
 
       applySettings();
     },
@@ -457,14 +467,9 @@ function convertMaterialsToPhysical(object) {
         side: oldMat.side ?? THREE.FrontSide
       });
 
-      mat.envMap = envMap;
-      mat.envMapIntensity = Number(ui.envMapIntensity.value);
-      mat.roughness = Number(ui.roughness.value);
-      mat.metalness = Number(ui.metalness.value);
-      mat.clearcoat = Number(ui.clearcoat.value);
-      mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
-
+      mat.envMap = hdrTexture;
       mat.needsUpdate = true;
+
       return mat;
     });
 
@@ -488,6 +493,7 @@ function frameModel(object) {
 
 function applySettings() {
   renderer.toneMappingExposure = Number(ui.exposure.value);
+
   scene.background = new THREE.Color(ui.background.value);
 
   hemiLight.intensity = Number(ui.hemi.value);
@@ -512,7 +518,7 @@ function applySettings() {
           : [obj.material];
 
         materials.forEach(mat => {
-          mat.envMap = envMap;
+          mat.envMap = hdrTexture;
           mat.envMapIntensity = Number(ui.envMapIntensity.value);
           mat.roughness = Number(ui.roughness.value);
           mat.metalness = Number(ui.metalness.value);
@@ -523,6 +529,14 @@ function applySettings() {
 
           if ("clearcoatRoughness" in mat) {
             mat.clearcoatRoughness = Number(ui.clearcoatRoughness.value);
+          }
+
+          if ("reflectivity" in mat) {
+            mat.reflectivity = Number(ui.reflectivity.value);
+          }
+
+          if ("specularIntensity" in mat) {
+            mat.specularIntensity = Number(ui.specularIntensity.value);
           }
 
           mat.needsUpdate = true;
@@ -565,6 +579,8 @@ function updateLabels() {
   labels.metalness.textContent = Number(ui.metalness.value).toFixed(2);
   labels.clearcoat.textContent = Number(ui.clearcoat.value).toFixed(2);
   labels.clearcoatRoughness.textContent = Number(ui.clearcoatRoughness.value).toFixed(2);
+  labels.reflectivity.textContent = Number(ui.reflectivity.value).toFixed(2);
+  labels.specularIntensity.textContent = Number(ui.specularIntensity.value).toFixed(2);
   labels.hemi.textContent = Number(ui.hemi.value).toFixed(2);
   labels.key.textContent = Number(ui.key.value).toFixed(2);
   labels.fill.textContent = Number(ui.fill.value).toFixed(2);
@@ -588,6 +604,8 @@ function getValuesText() {
     "material.metalness = " + Number(ui.metalness.value).toFixed(2),
     "material.clearcoat = " + Number(ui.clearcoat.value).toFixed(2),
     "material.clearcoatRoughness = " + Number(ui.clearcoatRoughness.value).toFixed(2),
+    "material.reflectivity = " + Number(ui.reflectivity.value).toFixed(2),
+    "material.specularIntensity = " + Number(ui.specularIntensity.value).toFixed(2),
     "hemiLight.intensity = " + Number(ui.hemi.value).toFixed(2),
     "keyLight.intensity = " + Number(ui.key.value).toFixed(2),
     "fillLight.intensity = " + Number(ui.fill.value).toFixed(2),
