@@ -641,17 +641,18 @@ function applyTextureSettings(mat) {
     if (tex) tex.repeat.set(scale, scale);
   });
 
+  if (!mat.userData.originalColor && mat.color) {
+    mat.userData.originalColor = mat.color.clone();
+  }
+
   const fpColor = Number(ui.fingerprintColor.value);
   const fpRough = Number(ui.fingerprintRoughness.value);
   const fpOpacity = Number(ui.fingerprintOpacity.value);
   const scratch = Number(ui.scratches.value);
   const plasticBump = Number(ui.plasticBump.value);
-  const metalBump = Number(ui.metalBump.value);
 
   const baseRough = Number(ui.roughness.value);
-  const combinedRoughness = Math.min(1, baseRough + fpRough * 0.35 + scratch * 0.28);
-
-  mat.roughness = combinedRoughness;
+  mat.roughness = Math.min(1, baseRough + fpRough * 0.35 + scratch * 0.28);
 
   if (scratch > 0.01) {
     mat.bumpMap = surfaceMaps.scratches;
@@ -664,20 +665,12 @@ function applyTextureSettings(mat) {
     mat.bumpScale = 0;
   }
 
-  if (mat.color && fpColor > 0.01) {
+  if (mat.color && mat.userData.originalColor) {
+    mat.color.copy(mat.userData.originalColor);
+
     const darken = 1 - fpColor * fpOpacity * 0.35;
     mat.color.multiplyScalar(darken);
   }
-
-  mat.userData.surfaceSettings = {
-    fingerprintColor: fpColor,
-    fingerprintRoughness: fpRough,
-    fingerprintOpacity: fpOpacity,
-    scratches: scratch,
-    plasticBump,
-    metalBump,
-    textureScale: scale
-  };
 }
 
 function applySettings() {
