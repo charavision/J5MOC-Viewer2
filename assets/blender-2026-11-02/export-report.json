@@ -1,0 +1,3627 @@
+{
+  "source": "J5MOC-DrehtellerWideUtility.blend",
+  "frame": 750,
+  "objects": 1348,
+  "vertices": 2101400,
+  "polygons": 1497279,
+  "materials": 16,
+  "materialMapping": [
+    {
+      "source": "mb:o:281:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:7047:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:187:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:141:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:754:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:67:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:802:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:251:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:905:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2369:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:146:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:104:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1778:297.001",
+      "target": "Web_pearlescent_3",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.38100001215934753,
+        0.2160000056028366,
+        0.03099999949336052,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:68:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:429:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1645:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:765:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1294:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:38:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:37:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:45:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:802:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:33:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:210:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1288:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:281:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:816:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2054:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2081:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2093:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:102:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3264:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:250:23.001",
+      "target": "Web_solid_4",
+      "kind": "mb_base_solid",
+      "color": [
+        0.01899999938905239,
+        0.08699999749660492,
+        0.38600000739097595,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1535:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2066:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:890:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:6079:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:165:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:508:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:37:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:271:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:210:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:237:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:85:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:510:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:151:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1219:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:340:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3176:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:614:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:873:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:751:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:203:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1642:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:176:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:306:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:155:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:150:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:749:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:872:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:14299:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:418:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:853:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:223:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:400:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1381:316.001",
+      "target": "Web_pearlescent_5",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.04800000041723251,
+        0.04500000178813934,
+        0.04100000113248825,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:256:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:164:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:18411:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:752:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1707:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:210:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:816:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:33:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:354:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1709:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:418:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:204:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:103:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:91:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1641:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:100:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:213:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:15642:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:64:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:153:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:46:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:853:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1705:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1643:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:824:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1519:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:39:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3040:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1286:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:110:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:149:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:248:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:279:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3:41.001",
+      "target": "Web_transparent_6",
+      "kind": "mb_base_transparent",
+      "color": [
+        0.3319999873638153,
+        0.0,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.08,
+      "metalness": 0.0,
+      "transmission": 1.0
+    },
+    {
+      "source": "mb:o:104:41.002",
+      "target": "Web_transparent_7",
+      "kind": "mb_base_transparent",
+      "color": [
+        0.3319999873638153,
+        0.0,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.08,
+      "metalness": 0.0,
+      "transmission": 1.0
+    },
+    {
+      "source": "mb:o:281:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:33:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1645:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:418:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:97:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2075:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:45:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:628:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:249:23.001",
+      "target": "Web_solid_4",
+      "kind": "mb_base_solid",
+      "color": [
+        0.01899999938905239,
+        0.08699999749660492,
+        0.38600000739097595,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3110:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:337:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:223:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:67:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:826:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:4776:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:354:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:103:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:13329:106.001",
+      "target": "Web_solid_9",
+      "kind": "mb_base_solid",
+      "color": [
+        0.9129999876022339,
+        0.20499999821186066,
+        0.017000000923871994,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:366:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:644:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1385:5.001",
+      "target": "Web_solid_10",
+      "kind": "mb_base_solid",
+      "color": [
+        0.6650000214576721,
+        0.503000020980835,
+        0.20200000703334808,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:163:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:203:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:79:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:35:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:63:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:150:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:38:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:34:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1176:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:615:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:81:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:227:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1293:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:905:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1733:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:243:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:756:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:732:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:45:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:68:154.001",
+      "target": "Web_solid_11",
+      "kind": "mb_base_solid",
+      "color": [
+        0.20200000703334808,
+        0.0,
+        0.014000000432133675,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:72:316.001",
+      "target": "Web_pearlescent_5",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.04800000041723251,
+        0.04500000178813934,
+        0.04100000113248825,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:333:154.001",
+      "target": "Web_solid_11",
+      "kind": "mb_base_solid",
+      "color": [
+        0.20200000703334808,
+        0.0,
+        0.014000000432133675,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1454:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:23413:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:39:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:717:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:718:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:64:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:190:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:96:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:6601:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:425:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1294:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:38:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1642:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:709:41.001",
+      "target": "Web_transparent_6",
+      "kind": "mb_base_transparent",
+      "color": [
+        0.3319999873638153,
+        0.0,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.08,
+      "metalness": 0.0,
+      "transmission": 1.0
+    },
+    {
+      "source": "mb:o:68:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1289:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:40:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:5613:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:5614:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:83:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:213:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2187:297.001",
+      "target": "Web_pearlescent_3",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.38100001215934753,
+        0.2160000056028366,
+        0.03099999949336052,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3443:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:337:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:329:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:34:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:65:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1646:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:240:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:333:315.001",
+      "target": "Web_pearlescent_12",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.27000001072883606,
+        0.29600000381469727,
+        0.3050000071525574,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2089:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1028:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1624:5.001",
+      "target": "Web_solid_10",
+      "kind": "mb_base_solid",
+      "color": [
+        0.6650000214576721,
+        0.503000020980835,
+        0.20200000703334808,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:344:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:4450:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3110:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1239:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:20331:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2253:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:42:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1913:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1291:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1225:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:85:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:802:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1771:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:23853:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:72:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3476:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1514:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:110:21.001",
+      "target": "Web_solid_13",
+      "kind": "mb_base_solid",
+      "color": [
+        0.671999990940094,
+        0.0,
+        0.013000000268220901,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1756:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:43:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:32:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1646:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:18915:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:12233:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:7047:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:333:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3:297.001",
+      "target": "Web_pearlescent_3",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.38100001215934753,
+        0.2160000056028366,
+        0.03099999949336052,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1225:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2053:192.001",
+      "target": "Web_solid_14",
+      "kind": "mb_base_solid",
+      "color": [
+        0.10499999672174454,
+        0.026000000536441803,
+        0.004000000189989805,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1235:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1691:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1771:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1223:5.001",
+      "target": "Web_solid_10",
+      "kind": "mb_base_solid",
+      "color": [
+        0.6650000214576721,
+        0.503000020980835,
+        0.20200000703334808,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:904:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:224:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:104:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1643:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:866:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2270:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:175:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:213:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:153:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1756:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:804:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:10853:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:43:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:698:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:224:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:792:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:35:297.001",
+      "target": "Web_pearlescent_3",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.38100001215934753,
+        0.2160000056028366,
+        0.03099999949336052,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:272:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:33:41.001",
+      "target": "Web_transparent_6",
+      "kind": "mb_base_transparent",
+      "color": [
+        0.3319999873638153,
+        0.0,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.08,
+      "metalness": 0.0,
+      "transmission": 1.0
+    },
+    {
+      "source": "mb:o:847:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:151:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1251:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:12232:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:709:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:434:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:435:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1642:297.001",
+      "target": "Web_pearlescent_3",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.38100001215934753,
+        0.2160000056028366,
+        0.03099999949336052,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:72:315.001",
+      "target": "Web_pearlescent_12",
+      "kind": "mb_base_pearlescent",
+      "color": [
+        0.27000001072883606,
+        0.29600000381469727,
+        0.3050000071525574,
+        1.0
+      ],
+      "roughness": 0.3,
+      "metalness": 0.9,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:81:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:333:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:195:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:212:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:425:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:1702:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:3:40.001",
+      "target": "Web_transparent_15",
+      "kind": "mb_base_transparent",
+      "color": [
+        0.8550000190734863,
+        0.8550000190734863,
+        0.8550000190734863,
+        1.0
+      ],
+      "roughness": 0.08,
+      "metalness": 0.0,
+      "transmission": 1.0
+    },
+    {
+      "source": "mb:o:255:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:5409:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:2911:194.001",
+      "target": "Web_solid_0",
+      "kind": "mb_base_solid",
+      "color": [
+        0.3659999966621399,
+        0.3610000014305115,
+        0.3709999918937683,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:271:199.001",
+      "target": "Web_solid_1",
+      "kind": "mb_base_solid",
+      "color": [
+        0.07400000095367432,
+        0.0820000022649765,
+        0.09300000220537186,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:816:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:111:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:67:26.001",
+      "target": "Web_solid_2",
+      "kind": "mb_base_solid",
+      "color": [
+        0.004999999888241291,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:97:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    },
+    {
+      "source": "mb:o:429:135.001",
+      "target": "Web_solid_8",
+      "kind": "mb_base_solid",
+      "color": [
+        0.11999999731779099,
+        0.17100000381469727,
+        0.2619999945163727,
+        1.0
+      ],
+      "roughness": 0.2,
+      "metalness": 0.0,
+      "transmission": 0.0
+    }
+  ],
+  "lights": 5,
+  "limitations": [
+    "Mecabricks procedural shading approximated by glTF PBR; Cycles bevel, subsurface scattering and indirect illumination are not identical in WebGL."
+  ],
+  "bytes": 23983692
+}
