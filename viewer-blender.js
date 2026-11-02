@@ -32,7 +32,7 @@ async function start(){
  const model=gltf.scene;scene.add(model);model.updateMatrixWorld(true);
  const box=new THREE.Box3().setFromObject(model,true),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3()),extent=Math.max(size.x,size.y,size.z);
  // Imported glTF materials remain intact, including transmission and emissive lenses.
- model.position.sub(center);model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
+ model.position.sub(center);model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;for(const material of (Array.isArray(o.material)?o.material:[o.material])){if(material.name==='Web_transparent_7'){material.emissive.set(0x000000);material.emissiveIntensity=0;}}}});
  const studio=new THREE.Group();scene.add(studio);
  const baseLights=[];
  for(const entry of rig.lights){
