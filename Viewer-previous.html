@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J5MOC Viewer</title>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<style>
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #babcbc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+canvas {
+  display: block;
+}
+
+#loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #babcbc;
+  color: #111;
+  font-size: 18px;
+  z-index: 20;
+}
+
+#instructions {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 30;
+  padding: 12px 30px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.45);
+  background: rgba(0,0,0,0.42);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  backdrop-filter: blur(8px);
+}
+
+#instructions:hover {
+  background: rgba(0,0,0,0.62);
+}
+</style>
+</head>
+
+<body>
+
+<div id="loading">Loading J5MOC...</div>
+
+<a id="instructions" href="https://reb.li/m/209065" target="_blank" rel="noopener">
+  Instructions
+</a>
+
+<script type="module">
+import * as THREE from "three";
+
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+
+const SETTINGS = {
+  background: "#babcbc",
+  exposure: 0.25,
+
+  envMapIntensity: 1.65,
+  giIntensity: 5.0,
+  roughness: 0.06,
+  metalness: 0.14,
+  clearcoat: 1.0,
+  clearcoatRoughness: 0.78,
+  reflectivity: 0.12,
+  specularIntensity: 0.21,
+
+  fingerprintColor: 0.0,
+  fingerprintRoughness: 0.0,
+  fingerprintOpacity: 0.6,
+  scratches: 0.05,
+  plasticBump: 0.025,
+  metalBump: 0.01,
+  textureScale: 2.5,
+
+  hemi: 0.0,
+  key: 0.58,
+  fill: 0.42,
+  rim: 0.26,
+
+  shadowDensity: 1.0,
+  shadowSoftness: 7.9,
+  shadowSize: 0.9,
+  shadowYOffset: -0.01,
+
+  bloomStrength: 0.01,
+  bloomRadius: 0.10,
+  bloomThreshold: 0.36,
+
+  distance: 4.0,
+  height: 1.4,
+  angle: 8,
+  fov: 22,
+  rotateSpeed: 0
+};
+
+let scene, camera, renderer, controls, composer;
+let model = null;
+let modelSize = 10;
+let hdrTexture = null;
+
+let hemiLight, keyLight, fillLight, rimLight, giLight;
+let bloomPass;
+let shadowPlane;
+let shadowMaterial;
+
+const textureLoader = new THREE.TextureLoader();
+
+const surfaceMaps = {
+  fingerprintsColor: null,
+  fingerprintsOpacity: null,
+  fingerprintsRoughness: null,
+  scratches: null,
+  plasticDisplacement: null,
+  metalDisplacement: null
+};
+
+init();
+loadSurfaceTextures();
+loadHDRI();
+loadModel();
+animate();
+
+function init() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(SETTINGS.background);
+
+  camera = new THREE.PerspectiveCamera(
+    SETTINGS.fov,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100000
+  );
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: false
+  });
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = SETTINGS.exposure;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  document.body.appendChild(renderer.domElement);
+
+  composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+
+  bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    SETTINGS.bloomStrength,
+    SETTINGS.bloomRadius,
+    SETTINGS.bloomThreshold
+  );
+
+  composer.addPass(bloomPass);
+  composer.addPass(new OutputPass());
+
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.autoRotate = SETTINGS.rotateSpeed > 0;
+  controls.autoRotateSpeed = SETTINGS.rotateSpeed;
+
+  hemiLight = new THREE.HemisphereLight(0xffffff, 0x080808, SETTINGS.hemi);
+  scene.add(hemiLight);
+
+  keyLight = new THREE.DirectionalLight(0xffffff, SETTINGS.key);
+  keyLight.position.set(6, 8, 5);
+  keyLight.castShadow = true;
+  keyLight.shadow.mapSize.width = 2048;
+  keyLight.shadow.mapSize.height = 2048;
+  keyLight.shadow.radius = SETTINGS.shadowSoftness;
+  keyLight.shadow.bias = -0.0001;
+  scene.add(keyLight);
+
+  fillLight = new THREE.DirectionalLight(0xffffff, SETTINGS.fill);
+  fillLight.position.set(-5, 3, -4);
+  scene.add(fillLight);
+
+  rimLight = new THREE.DirectionalLight(0xffffff, SETTINGS.rim);
+  rimLight.position.set(-6, 4, 8);
+  scene.add(rimLight);
+
+  giLight = new THREE.HemisphereLight(0xffffff, 0x222222, SETTINGS.giIntensity);
+  scene.add(giLight);
+
+  createFakeContactShadow();
+
+  window.addEventListener("resize", onResize);
+}
+
+function loadTexture(path, srgb = false) {
+  const tex = textureLoader.load(path);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(SETTINGS.textureScale, SETTINGS.textureScale);
+  tex.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
+  return tex;
+}
+
+function loadSurfaceTextures() {
+  surfaceMaps.fingerprintsColor = loadTexture("./textures/Fingerprints003_4K_Color.jpg", true);
+  surfaceMaps.fingerprintsOpacity = loadTexture("./textures/Fingerprints003_4K_Opacity.jpg", false);
+  surfaceMaps.fingerprintsRoughness = loadTexture("./textures/Fingerprints003_4K_Roughness.jpg", false);
+  surfaceMaps.scratches = loadTexture("./textures/Scratches003_4K_var2.jpg", false);
+  surfaceMaps.plasticDisplacement = loadTexture("./textures/Plastic015B_4K-JPG_Displacement.jpg", false);
+  surfaceMaps.metalDisplacement = loadTexture("./textures/Metal015_4K-JPG_Displacement.jpg", false);
+}
+
+function loadHDRI() {
+  new RGBELoader().load(
+    "./studio_small_09_4k.hdr",
+    texture => {
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      hdrTexture = texture;
+      scene.environment = hdrTexture;
+      applyMaterialSettings();
+    },
+    undefined,
+    error => console.error("HDR konnte nicht geladen werden:", error)
+  );
+}
+
+function loadModel() {
+  const loader = new GLTFLoader();
+  loader.setMeshoptDecoder(MeshoptDecoder);
+
+  loader.load(
+    "./Untitled.glb",
+    gltf => {
+      model = gltf.scene;
+      scene.add(model);
+
+      convertMaterialsToPhysical(model);
+      frameModel(model);
+      applyMaterialSettings();
+
+      document.getElementById("loading").style.display = "none";
+    },
+    undefined,
+    error => {
+      console.error(error);
+      document.getElementById("loading").innerText = "Fehler beim Laden des Modells.";
+    }
+  );
+}
+
+function convertMaterialsToPhysical(object) {
+  object.traverse(obj => {
+    if (!obj.isMesh || !obj.material) return;
+
+    obj.castShadow = true;
+    obj.receiveShadow = true;
+
+    const oldMaterials = Array.isArray(obj.material)
+      ? obj.material
+      : [obj.material];
+
+    const newMaterials = oldMaterials.map(oldMat => {
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: oldMat.color ? oldMat.color.clone() : new THREE.Color(0xffffff),
+        map: oldMat.map || null,
+        normalMap: oldMat.normalMap || null,
+        transparent: oldMat.transparent || false,
+        opacity: oldMat.opacity ?? 1,
+        side: oldMat.side ?? THREE.FrontSide
+      });
+
+      mat.userData.originalColor = mat.color.clone();
+      return mat;
+    });
+
+    obj.material = Array.isArray(obj.material) ? newMaterials : newMaterials[0];
+  });
+}
+
+function applyMaterialSettings() {
+  if (!model) return;
+
+  model.traverse(obj => {
+    if (!obj.isMesh || !obj.material) return;
+
+    const materials = Array.isArray(obj.material)
+      ? obj.material
+      : [obj.material];
+
+    materials.forEach(mat => {
+      if (!mat.userData.originalColor && mat.color) {
+        mat.userData.originalColor = mat.color.clone();
+      }
+
+      mat.envMap = hdrTexture;
+      mat.envMapIntensity = SETTINGS.envMapIntensity;
+      mat.metalness = SETTINGS.metalness;
+
+      if ("clearcoat" in mat) mat.clearcoat = SETTINGS.clearcoat;
+      if ("clearcoatRoughness" in mat) mat.clearcoatRoughness = SETTINGS.clearcoatRoughness;
+      if ("reflectivity" in mat) mat.reflectivity = SETTINGS.reflectivity;
+      if ("specularIntensity" in mat) mat.specularIntensity = SETTINGS.specularIntensity;
+
+      applySurfaceSettings(mat);
+
+      mat.needsUpdate = true;
+    });
+  });
+}
+
+function applySurfaceSettings(mat) {
+  const baseRough = SETTINGS.roughness;
+  const fpRough = SETTINGS.fingerprintRoughness;
+  const scratch = SETTINGS.scratches;
+
+  mat.roughness = Math.min(1, baseRough + fpRough * 0.35 + scratch * 0.28);
+
+  if (scratch > 0.01) {
+    mat.bumpMap = surfaceMaps.scratches;
+    mat.bumpScale = scratch * 0.045 + SETTINGS.plasticBump;
+  } else if (SETTINGS.plasticBump > 0.001) {
+    mat.bumpMap = surfaceMaps.plasticDisplacement;
+    mat.bumpScale = SETTINGS.plasticBump;
+  } else {
+    mat.bumpMap = null;
+    mat.bumpScale = 0;
+  }
+
+  if (mat.color && mat.userData.originalColor) {
+    mat.color.copy(mat.userData.originalColor);
+    const darken = 1 - SETTINGS.fingerprintColor * SETTINGS.fingerprintOpacity * 0.35;
+    mat.color.multiplyScalar(darken);
+  }
+}
+
+function frameModel(object) {
+  const box = new THREE.Box3().setFromObject(object);
+  const center = new THREE.Vector3();
+  const size = new THREE.Vector3();
+
+  box.getCenter(center);
+  box.getSize(size);
+
+  object.position.sub(center);
+  modelSize = Math.max(size.x, size.y, size.z);
+
+  updateCamera();
+  updateFakeShadow();
+}
+
+function updateCamera() {
+  const angle = THREE.MathUtils.degToRad(SETTINGS.angle);
+  const distance = modelSize * SETTINGS.distance;
+  const height = modelSize * SETTINGS.height;
+
+  camera.position.set(
+    Math.sin(angle) * distance,
+    height,
+    Math.cos(angle) * distance
+  );
+
+  camera.near = modelSize / 100;
+  camera.far = modelSize * 100;
+  camera.lookAt(0, 0, 0);
+  camera.updateProjectionMatrix();
+
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+
+function createFakeContactShadow() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 512;
+  canvas.height = 512;
+
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createRadialGradient(256, 256, 10, 256, 256, 250);
+
+  gradient.addColorStop(0.0, "rgba(0,0,0,1)");
+  gradient.addColorStop(0.35, "rgba(0,0,0,0.45)");
+  gradient.addColorStop(0.7, "rgba(0,0,0,0.12)");
+  gradient.addColorStop(1.0, "rgba(0,0,0,0)");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 512, 512);
+
+  const shadowTexture = new THREE.CanvasTexture(canvas);
+  shadowTexture.colorSpace = THREE.SRGBColorSpace;
+
+  shadowMaterial = new THREE.MeshBasicMaterial({
+    map: shadowTexture,
+    transparent: true,
+    opacity: SETTINGS.shadowDensity,
+    depthWrite: false
+  });
+
+  shadowPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    shadowMaterial
+  );
+
+  shadowPlane.rotation.x = -Math.PI / 2;
+  shadowPlane.renderOrder = -1;
+  scene.add(shadowPlane);
+}
+
+function updateFakeShadow() {
+  if (!shadowPlane || !shadowMaterial) return;
+
+  shadowMaterial.opacity = SETTINGS.shadowDensity;
+
+  const scale = modelSize * SETTINGS.shadowSize * SETTINGS.shadowSoftness * 0.18;
+  shadowPlane.scale.set(scale, scale, scale);
+  shadowPlane.position.set(
+    0,
+    -modelSize * 0.48 + SETTINGS.shadowYOffset * modelSize,
+    0
+  );
+}
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+  bloomPass.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  composer.render();
+}
+</script>
+
+</body>
+</html>
